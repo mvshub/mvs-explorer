@@ -29,7 +29,7 @@ rpcServer: 'http://localhost:8820/rpc'
 npm run server
 ```
 
-启动webpack dev server: http://localhost
+启动 webpack dev server: http://localhost
 ```
 npm run dev
 ```
@@ -41,7 +41,7 @@ npm run dev
 npm run dll
 npm run release
 ```
-前端代码js，css会被构建到dis/目录下，正式部署环境访问的为改目录下的代码，可以结合使用cdn将改目录文件上传到cdn服务，修改server/config/index.js文件中cdn的配置路径即可
+前端代码js，css会被构建到dis/目录下，正式部署环境访问的为改目录下的代码，可以结合使用cdn将改目录文件上传到cdn服务，修改server/config/index.js文件中cdn的配置路径即可
 
 运行web服务
 ```
@@ -65,9 +65,9 @@ schedule: '01:00:00'
 //可关闭 schedule = false
 ```
 
-可手动云运行统计脚本
+可手动运行统计脚本
 ```
 npm run report
 ```
 
-脚本会记录上一次统计的区块高度，从上一次结束的位置开始统计
+脚本会记录上一次统计的区块高度，从上一次结束的位置开始统计
