@@ -46,5 +46,22 @@ module.exports = {
             }
         });
         return source;
+    },
+    // 获取交易列表中所有参与的地址
+    listTxAddress(tx) {
+        const res = {};
+        tx.forEach(item => {
+            item.inputs.forEach(input => {
+                if (input.address) {
+                    res[input.address] = true;
+                }
+            });
+            item.outputs.forEach(output => {
+                if (output.address) {
+                    res[output.address] = true;
+                }
+            });
+        });
+        return Object.keys(res);
     }
 }

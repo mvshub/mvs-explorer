@@ -64,6 +64,6 @@ app.listen(3080, () => {
 // 运行统计任务
 if (config.schedule) {
   const dayLoop = require('./server/script/day_count');
-  const sched = later.parse.recur().on('01:00:00').time();
+  const sched = later.parse.recur().on(config.schedule).time();
   later.setInterval(dayLoop, sched);
 }
