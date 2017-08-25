@@ -1,0 +1,86 @@
+.component-header-wrap {
+  font-size: 14px;
+  position: relative;
+  .logo {
+    float: left;
+    padding: 0 15px;
+  }
+
+  .logo {
+    vertical-align: middle;
+    > span {
+      font-size: 36px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    a{
+      color: #fff;
+      text-decoration: none;
+    }
+    img{
+      display: inline-block;
+      vertical-align: middle;
+    }
+    > div {
+      display: inline-block;
+      vertical-align: middle;
+      height: 24px;
+      line-height: 24px;
+      padding: 0 15px;
+      margin-left: 10px;
+      border-radius: 1px;
+      background-color: #4da5e1;
+      font-size: 13px;
+      color: #fff;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        display: block;
+        border-right: 6px solid #4da5e1;
+        border-top: 3px solid transparent;
+        border-bottom: 3px solid transparent;
+        top: 50%;
+        left: -6px;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  .search{
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 200px;
+    .ant-input{
+      height: 34px;
+    }
+  }
+  .menus{
+    float: right;
+    line-height: 90px;
+    position: absolute;
+    right: 20px;
+    top:0px;
+    a{
+      padding: 5px 10px;
+      margin-right: 10px;
+      color: #fff;
+      text-decoration: none;
+      &:hover{
+        background: #4da5e1;
+      }
+    }
+    a:last-child{
+      margin-right: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 768px){
+  .component-header-wrap{
+    .logo{
+      display: none;
+    }
+  }
+}

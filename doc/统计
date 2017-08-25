@@ -1,0 +1,11 @@
+按天统计
+day: 新增地址数,交易笔数,新块数,新增ETP产量,转账量,地址总量
+
+排行榜
+ept: top 1000
+
+loop_record
+id,type,start,end,update_time
+
+address
+id, address, last_tx_time, update_time, etp, zgc, cmc
