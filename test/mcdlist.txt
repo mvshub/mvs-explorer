@@ -1,0 +1,1956 @@
+:: seed :: 
+
+Usage: mvs seed [-h] [--bit_length value] [--config value]               
+
+Info: Generate a pseudorandom seed.                                      
+
+Options (named):
+
+-b [--bit_length]    The length of the seed in bits. Must be divisible by
+                     8 and must not be less than 128, defaults to 256.   
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+
+------------------
+:: ec-to-address :: 
+
+Usage: mvs ec-to-address [-h] [--config value] [--version value]         
+[EC_PUBLIC_KEY]                                                          
+
+Info: Convert an EC public key to a payment address.                     
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-v [--version]       The desired payment address version.                
+
+Arguments (positional):
+
+EC_PUBLIC_KEY        The Base16 EC public key to convert. If not         
+                     specified the key is read from STDIN.               
+
+
+------------------
+:: ec-to-public :: 
+
+Usage: mvs ec-to-public [-hu] [--config value] [EC_PRIVATE_KEY]          
+
+Info: Derive the EC public key of an EC private key. Defaults to the     
+compressed public key format.                                            
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-u [--uncompressed]  Derive using the uncompressed public key format.    
+
+Arguments (positional):
+
+EC_PRIVATE_KEY       The Base16 EC private key. If not specified the key 
+                     is read from STDIN.                                 
+
+
+------------------
+:: fetch-balance :: 
+
+Usage: mvs fetch-balance [-h] [--config value] [--format value]          
+[PAYMENT_ADDRESS]                                                        
+
+Info: Get the balance in satoshi of a payment address. Requires a        
+Libbitcoin/Obelisk server connection.                                    
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-f [--format]        The output format. Options are 'info', 'json' and   
+                     'xml', defaults to 'info'.                          
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+PAYMENT_ADDRESS      The payment address. If not specified the address is
+                     read from STDIN.                                    
+
+
+------------------
+:: fetch-header :: 
+
+Usage: mvs fetch-header [-h] [--config value] [--format value] [--hash   
+value] [--height value]                                                  
+
+Info: Get the block header from the specified hash or height. Height is  
+ignored if both are specified. Requires a Libbitcoin/Obelisk server      
+connection.                                                              
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-f [--format]        The output format. Options are 'info', 'json' and   
+                     'xml', defaults to 'info'.                          
+-h [--help]          Get a description and instructions for this command.
+-s [--hash]          The Base16 block hash.                              
+-t [--height]        The block height.                                   
+
+
+
+
+------------------
+:: fetch-height :: 
+
+Usage: mvs fetch-height [-h] [--config value] [SERVER-URL]               
+
+Info: Get the last block height. Requires a Libbitcoin/Obelisk server    
+connection.                                                              
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+SERVER-URL           The URL of the Libbitcoin/Obelisk server to use. If 
+                     not specified the URL is obtained from configuration
+                     settings or defaults.                               
+
+
+------------------
+:: fetch-history :: 
+
+Usage: mvs fetch-history [-h] [--config value] [--format value]          
+[PAYMENT_ADDRESS]                                                        
+
+Info: Get list of output points, values, and spends for a payment        
+address. Requires a Libbitcoin/Obelisk server connection.                
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-f [--format]        The output format. Options are 'info', 'json' and   
+                     'xml', defaults to 'info'.                          
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+PAYMENT_ADDRESS      The payment address. If not specified the address is
+                     read from STDIN.                                    
+
+
+------------------
+:: fetch-public-key :: 
+
+Usage: mvs fetch-public-key [-h] [--config value] [PAYMENT_ADDRESS]      
+
+Info: Get the EC public key of the address, if it exists on the          
+blockchain. Requires a Libbitcoin/Obelisk server connection.             
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+PAYMENT_ADDRESS      The payment address of the public key. If not       
+                     specified the address is read from STDIN.           
+
+
+------------------
+:: fetch-stealth :: 
+
+Usage: mvs fetch-stealth [-h] [--config value] [--format value] [--height
+value] [FILTER]                                                          
+
+Info: Get metadata on potential payment transactions by stealth prefix   
+filter. Requires a Libbitcoin server connection.                         
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-f [--format]        The output format. Options are 'info', 'json' and   
+                     'xml', defaults to 'info'.                          
+-h [--help]          Get a description and instructions for this command.
+-t [--height]        The minimum block height of transactions to include.
+
+Arguments (positional):
+
+FILTER               The Base2 stealth prefix filter used to locate      
+                     transactions. Defaults to all stealth transactions. 
+
+
+------------------
+:: fetch-tx :: 
+
+Usage: mvs fetch-tx [-h] [--config value] [--format value] [HASH]        
+
+Info: Get a transaction by its hash. Requires a Libbitcoin/Obelisk server
+connection.                                                              
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-f [--format]        The output format. Options are 'info', 'json' and   
+                     'xml', defaults to 'info'.                          
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+HASH                 The Base16 transaction hash of the transaction to   
+                     get. If not specified the transaction hash is read  
+                     from STDIN.                                         
+
+
+------------------
+:: fetch-tx-index :: 
+
+Usage: mvs fetch-tx-index [-h] [--config value] [--format value] [HASH]  
+
+Info: Get the block height and index of a transaction. Requires a        
+Libbitcoin/Obelisk server connection.                                    
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-f [--format]        The output format. Options are 'info', 'json' and   
+                     'xml', defaults to 'info'.                          
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+HASH                 The Base16 transaction hash of the transaction index
+                     to get. If not specified the transaction hash is    
+                     read from STDIN.                                    
+
+
+------------------
+:: fetch-utxo :: 
+
+Usage: mvs fetch-utxo [-h] [--algorithm value] [--config value] [--format
+value] SATOSHI [PAYMENT_ADDRESS]                                         
+
+Info: Get enough unspent transaction outputs from a payment address to   
+pay a number of satoshi. Requires a Libbitcoin server connection.        
+
+Options (named):
+
+-a [--algorithm]     The algorithm for unspent output selection. Options 
+                     are 'greedy', defaults to 'greedy'                  
+-c [--config]        The path to the configuration settings file.        
+-f [--format]        The output format. Options are 'info', 'json' and   
+                     'xml', defaults to 'info'.                          
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+SATOSHI              The whole number of satoshi.                        
+PAYMENT_ADDRESS      The payment address. If not specified the address is
+                     read from STDIN.                                    
+
+
+------------------
+:: hd-new :: 
+
+Usage: mvs hd-new [-h] [--config value] [--version value] [SEED]         
+
+Info: Create a new HD (BIP32) private key from entropy.                  
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-v [--version]       The desired HD private key version, defaults to     
+                     76066276.                                           
+
+Arguments (positional):
+
+SEED                 The Base16 entropy for the new key. Must be at least
+                     128 bits in length. If not specified the seed is    
+                     read from STDIN.                                    
+
+
+------------------
+:: hd-private :: 
+
+Usage: mvs hd-private [-dh] [--config value] [--index value]             
+[HD_PRIVATE_KEY]                                                         
+
+Info: Derive a child HD (BIP32) private key from another HD private key. 
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-d [--hard]          Signal to create a hardened key.                    
+-h [--help]          Get a description and instructions for this command.
+-i [--index]         The HD index, defaults to 0.                        
+
+Arguments (positional):
+
+HD_PRIVATE_KEY       The parent HD private key. If not specified the key 
+                     is read from STDIN.                                 
+
+
+------------------
+:: hd-to-ec :: 
+
+Usage: mvs hd-to-ec [-h] [--config value] [--public_version value]       
+[--secret_version value] [HD_KEY]                                        
+
+Info: Convert a HD (BIP32) public or private key to the equivalent EC    
+public or private key.                                                   
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-p [--public_version] The expected version for an HD public key, defaults 
+                     to 76067358.                                        
+-s [--secret_version] The expected version for an HD private key, defaults
+                     to 76066276.                                        
+
+Arguments (positional):
+
+HD_KEY               The HD public or private key to convert. If not     
+                     specified the key is read from STDIN.               
+
+
+------------------
+:: hd-to-public :: 
+
+Usage: mvs hd-to-public [-h] [--config value] [--version value]          
+[HD_PRIVATE_KEY]                                                         
+
+Info: Derive the HD (BIP32) public key of a HD private key.              
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-v [--version]       The desired HD public key version, defaults to      
+                     76067358.                                           
+
+Arguments (positional):
+
+HD_PRIVATE_KEY       The HD private key. If not specified the key is read
+                     from STDIN.                                         
+
+
+------------------
+:: help :: 
+
+Usage: mvs help [-h] [--config value] [COMMAND]                          
+
+Info: Get the list of commands.                                          
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+COMMAND              The command for which help is requested.            
+
+
+------------------
+:: input-set :: 
+
+Usage: mvs input-set [-h] [--config value] [--index value]               
+ENDORSEMENT_SCRIPT [TRANSACTION]                                         
+
+Info: Assign a script to an existing transaction input.                  
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-i [--index]         The ordinal position of the input within the        
+                     transaction, defaults to 0.                         
+
+Arguments (positional):
+
+ENDORSEMENT_SCRIPT   The endorsement script to assign to the input.      
+                     Multiple tokens must be quoted.                     
+TRANSACTION          The Base16 transaction. If not specified the        
+                     transaction is read from STDIN.                     
+
+
+------------------
+:: input-sign :: 
+
+Usage: mvs input-sign [-ah] [--config value] [--index value] [--sign_type
+value] EC_PRIVATE_KEY CONTRACT [TRANSACTION]                             
+
+Info: Create an endorsement for a transaction input.                     
+
+Options (named):
+
+-a [--anyone]        Modify signature hashing so that other inputs are   
+                     ignored.                                            
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-i [--index]         The ordinal position of the input within the        
+                     transaction, defaults to 0.                         
+-s [--sign_type]     A token that indicates how the transaction should be
+                     hashed for signing. Options are 'all', 'none', and  
+                     'single', defaults to 'all'.                        
+
+Arguments (positional):
+
+EC_PRIVATE_KEY       The Base16 EC private key to sign with.             
+CONTRACT             The previous output script to use in signing.       
+                     Multiple tokens must be quoted.                     
+TRANSACTION          The Base16 transaction. If not specified the        
+                     transaction is read from STDIN.                     
+
+
+------------------
+:: input-validate :: 
+
+Usage: mvs input-validate [-h] [--config value] [--index value]          
+EC_PUBLIC_KEY CONTRACT ENDORSEMENT [TRANSACTION]                         
+
+Info: Validate a transaction input endorsement.                          
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-i [--index]         The ordinal position of the input within the        
+                     transaction, defaults to 0.                         
+
+Arguments (positional):
+
+EC_PUBLIC_KEY        The Base16 EC public key to verify against.         
+CONTRACT             The previous output script used in signing. Multiple
+                     tokens must be quoted.                              
+ENDORSEMENT          The endorsement to validate.                        
+TRANSACTION          The Base16 transaction. If not specified the        
+                     transaction is read from STDIN.                     
+
+
+------------------
+:: mnemonic-new :: 
+
+Usage: mvs mnemonic-new [-h] [--config value] [--language value] [SEED]  
+
+Info: Create a mnemonic seed (BIP39) from entropy. WARNING: mnemonic     
+should be created from properly generated entropy.                       
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-l [--language]      The language identifier of the mnemonic dictionary  
+                     to use. Options are 'en', 'es', 'ja', 'zh_Hans',    
+                     'zh_Hant' and 'any', defaults to 'en'.              
+
+Arguments (positional):
+
+SEED                 The Base16 entropy from which the mnemonic is       
+                     created. The length must be evenly divisible by 32  
+                     bits. If not specified the entropy is read from     
+                     STDIN.                                              
+
+
+------------------
+:: mnemonic-to-seed :: 
+
+Usage: mvs mnemonic-to-seed [-h] [--config value] [--language value]     
+[--passphrase value] [WORD]...                                           
+
+Info: Convert a mnemonic seed (BIP39) to its numeric representation.     
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-l [--language]      The language identifier of the dictionary of the    
+                     mnemonic. Options are 'en', 'es', 'ja', 'zh_Hans',  
+                     'zh_Hant' and 'any', defaults to 'any'.             
+-p [--passphrase]    An optional passphrase for converting the mnemonic  
+                     to a seed.                                          
+
+Arguments (positional):
+
+WORD                 The set of words that that make up the mnemonic. If 
+                     not specified the words are read from STDIN.        
+
+
+------------------
+:: send-tx :: 
+
+Usage: mvs send-tx [-h] [--config value] [TRANSACTION]                   
+
+Info: Broadcast a transaction to the Bitcoin network via an              
+Libbitcoin/Obelisk server.                                               
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+TRANSACTION          The Base16 transaction to send. If not specified the
+                     transaction is read from STDIN.                     
+
+
+------------------
+:: settings :: 
+
+Usage: mvs settings [-h] [--config value] [--format value]               
+
+Info: Display the loaded configuration settings.                         
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-f [--format]        The output format. Options are 'info', 'json' and   
+                     'xml', defaults to 'info'.                          
+-h [--help]          Get a description and instructions for this command.
+
+
+
+
+------------------
+:: stealth-decode :: 
+
+Usage: mvs stealth-decode [-h] [--config value] [--format value]         
+[STEALTH_ADDRESS]                                                        
+
+Info: Decode a stealth address.                                          
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-f [--format]        The output format. Options are 'info', 'json' and   
+                     'xml', defaults to 'info'.                          
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+STEALTH_ADDRESS      The stealth payment address. If not specified the   
+                     address is read from STDIN.                         
+
+
+------------------
+:: stealth-encode :: 
+
+Usage: mvs stealth-encode [-h] [--config value] [--filter value]         
+[--signatures value] [--version value] SCAN_PUBKEY [SPEND_PUBKEY]...     
+
+Info: Encode a stealth payment address.                                  
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-f [--filter]        The Base2 stealth prefix filter that will be used to
+                     locate payments.                                    
+-h [--help]          Get a description and instructions for this command.
+-s [--signatures]    The number of signatures required to spend a payment
+                     to the stealth address. Defaults to the number of   
+                     SPEND_PUBKEYs.                                      
+-v [--version]       The desired payment address version, defaults to 0. 
+
+Arguments (positional):
+
+SCAN_PUBKEY          The Base16 EC public key required to create a       
+                     payment.                                            
+SPEND_PUBKEY         The set of Base16 EC public keys corresponding to   
+                     private keys that will be able to spend payments to 
+                     the address. Defaults to the value of SCAN_PUBKEY.  
+
+
+------------------
+:: stealth-public :: 
+
+Usage: mvs stealth-public [-h] [--config value] SPEND_PUBKEY             
+[SHARED_SECRET]                                                          
+
+Info: Derive the stealth public key necessary to address and to identify 
+a stealth payment.                                                       
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+SPEND_PUBKEY         The Base16 EC spend public key of a stealth address.
+SHARED_SECRET        The Base16 EC shared secret corresponding to the    
+                     SPEND_PUBKEY. If not specified the key is read from 
+                     STDIN.                                              
+
+
+------------------
+:: stealth-secret :: 
+
+Usage: mvs stealth-secret [-h] [--config value] SPEND_SECRET             
+[SHARED_SECRET]                                                          
+
+Info: Derive the stealth private key necessary to spend a stealth        
+payment.                                                                 
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+SPEND_SECRET         The Base16 EC spend secret for spending a stealth   
+                     payment.                                            
+SHARED_SECRET        The Base16 EC shared secret corresponding to the    
+                     SPEND_PUBKEY. If not specified the key is read from 
+                     STDIN.                                              
+
+
+------------------
+:: stealth-shared :: 
+
+Usage: mvs stealth-shared [-h] [--config value] SECRET [PUBKEY]          
+
+Info: Derive the secret shared between an ephemeral key pair and a scan  
+key pair. Provide scan SECRET and ephemeral PUBKEY, or ephemeral SECRET  
+and scan PUBKEY.                                                         
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+SECRET               A Base16 EC private key. Either the scan or         
+                     ephemeral secret.                                   
+PUBKEY               A Base16 EC public key. Either the scan or ephemeral
+                     public key. If not specified the key is read from   
+                     STDIN.                                              
+
+
+------------------
+:: tx-decode :: 
+
+Usage: mvs tx-decode [-h] [--config value] [--format value] [TRANSACTION]
+
+Info: Decode a Base16 transaction.                                       
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-f [--format]        The output format. Options are 'info', 'json' and   
+                     'xml', defaults to 'info'.                          
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+TRANSACTION          The Base16 transaction. If not specified the        
+                     transaction is read from STDIN.                     
+
+
+------------------
+:: tx-encode :: 
+
+Usage: mvs tx-encode [-h] [--config value] [--deposit value] [--input    
+value] [--lock_time value] [--output value] [--period value]             
+[--script_version value] [--version value]                               
+
+Info: Encode an unsigned transaction as Base16.                          
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-d [--deposit]       The transaction output deposit data encoded as      
+                     TARGET:SATOSHI. TARGET is an address (including     
+                     stealth or pay-to-script-hash) or a Base16 script.  
+                     SATOSHI is the 32 bit spend amount in satoshi.      
+-h [--help]          Get a description and instructions for this command.
+-i [--input]         The set of transaction input points encoded as      
+                     TXHASH:INDEX:SEQUENCE. TXHASH is a Base16           
+                     transaction hash. INDEX is the 32 bit input index in
+                     the context of the transaction. SEQUENCE is the     
+                     optional 32 bit input sequence and defaults to the  
+                     maximum value.                                      
+-l [--lock_time]     The transaction lock time.                          
+-o [--output]        The set of transaction output data encoded as       
+                     TARGET:SATOSHI:SEED. TARGET is an address (including
+                     stealth or pay-to-script-hash) or a Base16 script.  
+                     SATOSHI is the 32 bit spend amount in satoshi. SEED 
+                     is required for stealth outputs and not used        
+                     otherwise. The same seed should NOT be used for     
+                     multiple outputs.                                   
+-p [--period]        The deposit period support [7, 30, 90, 182, 365]    
+                     days                                                
+-s [--script_version] The pay-to-script-hash payment address version,     
+                     defaults to 5. This is used to differentiate output 
+                     addresses.                                          
+-v [--version]       The transaction version, defaults to 1.             
+
+
+
+
+------------------
+:: tx-sign :: 
+
+Usage: mvs tx-sign [-h] [--config value] EC_PRIVATE_KEY [TRANSACTION]... 
+
+Info: Sign a set of transactions using a private key. Output is suitable 
+for sending to Bitcoin network.                                          
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+EC_PRIVATE_KEY       The EC private key to be used for signing.          
+TRANSACTION          The set of Base16 transactions. If not specified the
+                     transactions are read from STDIN.                   
+
+
+------------------
+:: validate-tx :: 
+
+Usage: mvs validate-tx [-h] [--config value] [TRANSACTION]               
+
+Info: Determine if a transaction is valid for submission to the          
+blockchain. Requires a Libbitcoin/Obelisk server connection.             
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+TRANSACTION          The Base16 transaction. If not specified the        
+                     transaction is read from STDIN.                     
+
+
+------------------
+:: stopall :: 
+
+Usage: mvs stopall [-h] [--config value] ADMINNAME ADMINAUTH             
+
+Info: stop mvsd.                                                         
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ADMINNAME            admin name.                                         
+ADMINAUTH            admin password/authorization.                       
+
+
+------------------
+:: stop :: 
+
+Usage: mvs stop [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH            
+
+Info: stop solo mining.                                                  
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: start :: 
+
+Usage: mvs start [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH           
+
+Info: start solo mining.                                                 
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getinfo :: 
+
+Usage: mvs getinfo [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH         
+
+Info: getinfo                                                            
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getpeerinfo :: 
+
+Usage: mvs getpeerinfo [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH     
+
+Info: getpeerinfo                                                        
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: ping :: 
+
+Usage: mvs ping [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH            
+
+Info: ping                                                               
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: addnode :: 
+
+Usage: mvs addnode [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH         
+
+Info: addnode                                                            
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getmininginfo :: 
+
+Usage: mvs getmininginfo [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH   
+
+Info: getmininginfo                                                      
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getbestblockhash :: 
+
+Usage: mvs getbestblockhash [-h] [--config value]                        
+
+Info: getbestblockhash                                                   
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+
+
+
+------------------
+:: getbestblockheader :: 
+
+Usage: mvs getbestblockheader [-h] [--config value]                      
+
+Info: getbestblockheader                                                 
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+
+
+
+------------------
+:: fetchheaderext :: 
+
+Usage: mvs fetchheaderext [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH  
+NUMBER                                                                   
+
+Info: fetchheaderext                                                     
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+NUMBER               Block number, or earliest, latest or pending        
+
+
+------------------
+:: gettransaction :: 
+
+Usage: mvs gettransaction [-h] [--config value] HASH                     
+
+Info: gettransaction                                                     
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+HASH                 The Base16 transaction hash of the transaction to   
+                     get. If not specified the transaction hash is read  
+                     from STDIN.                                         
+
+
+------------------
+:: backupwallet :: 
+
+Usage: mvs backupwallet [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH    
+
+Info: backupwallet                                                       
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: importwallet :: 
+
+Usage: mvs importwallet [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH    
+
+Info: importwallet                                                       
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: lockwallet :: 
+
+Usage: mvs lockwallet [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH      
+
+Info: lockwallet                                                         
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: backupaccount :: 
+
+Usage: mvs backupaccount [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH   
+
+Info: backupaccount                                                      
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: importaccount :: 
+
+Usage: mvs importaccount [-h] --accoutname value --password value        
+[--config value] [--hd_index value] [--language value] WORD              
+
+Info: importaccount                                                      
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-i [--hd_index]      Teh HD index for the account.                       
+-l [--language]      The language identifier of the dictionary of the    
+                     mnemonic. Options are 'en', 'es', 'ja', 'zh_Hans',  
+                     'zh_Hant' and 'any', defaults to 'any'.             
+-n [--accoutname]    Account name.                                       
+-p [--password]      Account password.                                   
+
+Arguments (positional):
+
+WORD                 The set of words that that make up the mnemonic. If 
+                     not specified the words are read from STDIN.        
+
+
+------------------
+:: getnewaccount :: 
+
+Usage: mvs getnewaccount [-h] [--config value] [--language value]        
+ACCOUNTNAME ACCOUNTAUTH                                                  
+
+Info: Generate a new account from this wallet.                           
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-l [--language]      Options are 'en', 'es', 'ja', 'zh_Hans', 'zh_Hant'  
+                     and 'any', defaults to 'en'.                        
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getaccount :: 
+
+Usage: mvs getaccount [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH      
+LASTWORD                                                                 
+
+Info: Show account details                                               
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+LASTWORD             The last word of your master private-key phrase.    
+
+
+------------------
+:: deleteaccount :: 
+
+Usage: mvs deleteaccount [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH   
+LASTWORD                                                                 
+
+Info: deleteaccount                                                      
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+LASTWORD             The last word of your private-key phrase.           
+
+
+------------------
+:: lockaccount :: 
+
+Usage: mvs lockaccount [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH     
+
+Info: lockaccount                                                        
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: setaccountinfo :: 
+
+Usage: mvs setaccountinfo [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH  
+
+Info: setaccountinfo                                                     
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: listaddresses :: 
+
+Usage: mvs listaddresses [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH   
+
+Info: List available addresses of this account.                          
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getnewaddress :: 
+
+Usage: mvs getnewaddress [-h] [--config value] [--number value]          
+ACCOUNTNAME ACCOUNTAUTH                                                  
+
+Info: Generate new address for this account.                             
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-n [--number]        The address count.                                  
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getaddress :: 
+
+Usage: mvs getaddress [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH      
+
+Info: getaddress                                                         
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getpublickey :: 
+
+Usage: mvs getpublickey [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH    
+[ADDRESS]                                                                
+
+Info: getpublickey                                                       
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+ADDRESS              Address.                                            
+
+
+------------------
+:: getblock :: 
+
+Usage: mvs getblock [-h] [--config value] HASH [JSON]                    
+
+Info: Get sepcified block header from wallet.                            
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+HASH                 block hash.                                         
+JSON                 use json format or not, default is false            
+
+
+------------------
+:: signmessage :: 
+
+Usage: mvs signmessage [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH     
+
+Info: signmessage                                                        
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: verifymessage :: 
+
+Usage: mvs verifymessage [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH   
+
+Info: verifymessage                                                      
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: createmultisig :: 
+
+Usage: mvs createmultisig [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH  
+
+Info: createmultisig                                                     
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: addmultisigaddress :: 
+
+Usage: mvs addmultisigaddress [-h] [--config value] ACCOUNTNAME          
+ACCOUNTAUTH                                                              
+
+Info: addmultisigaddress                                                 
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: validateaddress :: 
+
+Usage: mvs validateaddress [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH 
+ADDRESS                                                                  
+
+Info: validateaddress                                                    
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+ADDRESS              address                                             
+
+
+------------------
+:: listbalances :: 
+
+Usage: mvs listbalances [-hn] [--config value] ACCOUNTNAME ACCOUNTAUTH   
+
+Info: List all balance details of each address of this account.          
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-n [--nozero]        List non-zero upsent records.                       
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getbalance :: 
+
+Usage: mvs getbalance [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH      
+
+Info: Show total balance details of this account.                        
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: listtxs :: 
+
+Usage: mvs listtxs [-h] [--config value] [--address value] [--height     
+value] [--symbol value] ACCOUNTNAME ACCOUNTAUTH                          
+
+Info: List transactions details of this account.                         
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-a [--address]       Address.                                            
+-e [--height]        Get tx according height eg: -e                      
+                     start-height:end-height.                            
+-s [--symbol]        Asset symbol.                                       
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: xfetchbalance :: 
+
+Usage: mvs xfetchbalance [-h] [--config value] [--type value] ADDRESS    
+
+Info: xfetchbalance                                                      
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-t [--type]          UTXO type, support types : etp/all. default value is
+                     all                                                 
+
+Arguments (positional):
+
+ADDRESS              Address.                                            
+
+
+------------------
+:: xfetchutxo :: 
+
+Usage: mvs xfetchutxo [-h] [--config value] [--type value] AMOUNT ADDRESS
+
+Info: xfetchutxo                                                         
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-t [--type]          UTXO type, support types : etp/all. default value is
+                     all                                                 
+
+Arguments (positional):
+
+AMOUNT               Amount.                                             
+ADDRESS              Address.                                            
+
+
+------------------
+:: gettx :: 
+
+Usage: mvs gettx [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH           
+
+Info: gettx                                                              
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getaddresstx :: 
+
+Usage: mvs getaddresstx [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH    
+
+Info: getaddresstx                                                       
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getaccounttx :: 
+
+Usage: mvs getaccounttx [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH    
+
+Info: getaccounttx                                                       
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: deposit :: 
+
+Usage: mvs deposit [-h] [--config value] [--address value] [--deposit    
+value] [--fee value] ACCOUNTNAME ACCOUNTAUTH AMOUNT                      
+
+Info: Deposit some etp, then get reward for frozen some etp.             
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-a [--address]       The deposit target address.                         
+-d [--deposit]       Deposits support [7, 30, 90, 182, 365] days.        
+                     defaluts to 7 days                                  
+-f [--fee]           The fee of tx. default_value 0.0001 etp             
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+AMOUNT               How many you will deposit.                          
+
+
+------------------
+:: send :: 
+
+Usage: mvs send [-h] [--config value] [--fee value] ACCOUNTNAME          
+ACCOUNTAUTH TOADDRESS AMOUNT                                             
+
+Info: send etp to a targert address, mychange goes to another existed    
+address of this account.                                                 
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-f [--fee]           The fee of tx. default_value 0.0001 etp             
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+TOADDRESS            Send to this address                                
+AMOUNT               How many you will spend                             
+
+
+------------------
+:: sendmore :: 
+
+Usage: mvs sendmore [-h] --receivers value [--config value] [--fee value]
+[--mychange value] ACCOUNTNAME ACCOUNTAUTH                               
+
+Info: send etp to multi target addresses, can specify mychange address.  
+Eg: [sendmore $name $password -r $address1:$amount1 -r $address2:$amount2
+-m $mychange_address]                                                    
+
+Options (named):
+
+-c [--config]        Get a description and instructions for this command.
+-h [--help]          Send to more target.                                
+-f [--fee]           The fee of tx. default_value 0.0001 etp             
+-m [--mychange]      Mychange to this address                            
+-r [--receivers]     Send to [address:amount].                           
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: sendfrom :: 
+
+Usage: mvs sendfrom [-h] [--config value] [--fee value] ACCOUNTNAME      
+ACCOUNTAUTH FROMADDRESS TOADDRESS AMOUNT                                 
+
+Info: send etp from a specified address of this account to target        
+address, mychange goes to from_address.                                  
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-f [--fee]           The fee of tx. default_value 0.0001 etp             
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+FROMADDRESS          Send from this address                              
+TOADDRESS            Send to this address                                
+AMOUNT               How many you will spend                             
+
+
+------------------
+:: sendwithmsg :: 
+
+Usage: mvs sendwithmsg [-h] [--config value] [--fee value] ACCOUNTNAME   
+ACCOUNTAUTH TOADDRESS AMOUNT MESSAGE                                     
+
+Info: sendwithmsg                                                        
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-f [--fee]           The fee of tx. default_value 0.0001 etp             
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+TOADDRESS            Send to this address                                
+AMOUNT               How many you will spend                             
+MESSAGE              message attached to the transaction                 
+
+
+------------------
+:: sendwithmsgfrom :: 
+
+Usage: mvs sendwithmsgfrom [-h] [--config value] [--fee value]           
+ACCOUNTNAME ACCOUNTAUTH FROMADDRESS TOADDRESS AMOUNT MESSAGE             
+
+Info: sendwithmsgfrom                                                    
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-f [--fee]           The fee of tx. default_value 0.0001 etp             
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+FROMADDRESS          Send from this address                              
+TOADDRESS            Send to this address                                
+AMOUNT               How many you will spend                             
+MESSAGE              message attached to the transaction                 
+
+
+------------------
+:: listassets :: 
+
+Usage: mvs listassets [-h] [--config value] [ACCOUNTNAME] [ACCOUNTAUTH]  
+
+Info: list assets details.                                               
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getasset :: 
+
+Usage: mvs getasset [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH SYMBOL 
+
+Info: getasset                                                           
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+SYMBOL               Asset symbol.                                       
+
+
+------------------
+:: getaddressasset :: 
+
+Usage: mvs getaddressasset [-h] [--config value] ADDRESS                 
+
+Info: getaddressasset                                                    
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ADDRESS              address                                             
+
+
+------------------
+:: getaccountasset :: 
+
+Usage: mvs getaccountasset [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH 
+
+Info: getaccountasset                                                    
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: createasset :: 
+
+Usage: mvs createasset [-h] --symbol value --volume value [--config      
+value] [--description value] [--issuer value] [--decimalnumber value]    
+ACCOUNTNAME ACCOUNTAUTH                                                  
+
+Info: createasset                                                        
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-d [--description]   The asset description.                              
+-i [--issuer]        The asset issuer.defaults to account name.          
+-n [--decimalnumber] The asset amount decimal number.                    
+-s [--symbol]        The asset symbol/name. Global unique.               
+-v [--volume]        The asset maximum supply volume.                    
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: issue :: 
+
+Usage: mvs issue [-h] [--config value] [--fee value] ACCOUNTNAME         
+ACCOUNTAUTH SYMBOL                                                       
+
+Info: issue                                                              
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-f [--fee]           The fee of tx. default_value 10 etp                 
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+SYMBOL               issued asset symbol                                 
+
+
+------------------
+:: issuefrom :: 
+
+Usage: mvs issuefrom [-h] [--config value] [--fee value] ACCOUNTNAME     
+ACCOUNTAUTH ADDRESS SYMBOL                                               
+
+Info: issuefrom                                                          
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-f [--fee]           The fee of tx. default_value 10 etp                 
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+ADDRESS              target address                                      
+SYMBOL               issued asset symbol                                 
+
+
+------------------
+:: sendasset :: 
+
+Usage: mvs sendasset [-h] [--config value] [--fee value] ACCOUNTNAME     
+ACCOUNTAUTH ADDRESS SYMBOL AMOUNT                                        
+
+Info: sendasset                                                          
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-f [--fee]           The fee of tx. default_value 0.0001 etp             
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+ADDRESS              Asset receiver.                                     
+SYMBOL               Asset symbol/name.                                  
+AMOUNT               Asset count.                                        
+
+
+------------------
+:: sendassetfrom :: 
+
+Usage: mvs sendassetfrom [-h] [--config value] [--fee value] ACCOUNTNAME 
+ACCOUNTAUTH FROMADDRESS TOADDRESS SYMBOL AMOUNT                          
+
+Info: sendassetfrom                                                      
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-f [--fee]           The fee of tx. default_value 0.0001 etp             
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+FROMADDRESS          from address                                        
+TOADDRESS            target address                                      
+SYMBOL               asset symbol                                        
+AMOUNT               The asset amount shares                             
+
+
+------------------
+:: getdid :: 
+
+Usage: mvs getdid [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH          
+
+Info: getdid                                                             
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: setdid :: 
+
+Usage: mvs setdid [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH          
+
+Info: setdid                                                             
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: sendwithdid :: 
+
+Usage: mvs sendwithdid [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH     
+
+Info: sendwithdid                                                        
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: settxfee :: 
+
+Usage: mvs settxfee [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH        
+
+Info: settxfee                                                           
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
+:: getwork :: 
+
+Usage: mvs getwork [-h] [--config value]                                 
+
+Info: getwork to get mining info                                         
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+
+
+
+------------------
+:: submitwork :: 
+
+Usage: mvs submitwork [-h] [--config value] NOUNCE HEADERHASH MIXHASH    
+
+Info: submitwork to submit mining result.                                
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+NOUNCE               nounce.                                             
+HEADERHASH           header hash.                                        
+MIXHASH              mix hash.                                           
+
+
+------------------
+:: setminingaccount :: 
+
+Usage: mvs setminingaccount [-h] [--config value] ACCOUNTNAME ACCOUNTAUTH
+PAYMENT_ADDRESS                                                          
+
+Info: setminingaccount when pool mining.                                 
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+PAYMENT_ADDRESS      the payment address of this account.                
+
+
+------------------
+:: changepasswd :: 
+
+Usage: mvs changepasswd [-h] --password value [--config value]           
+ACCOUNTNAME ACCOUNTAUTH                                                  
+
+Info: changepasswd                                                       
+
+Options (named):
+
+-c [--config]        The path to the configuration settings file.        
+-h [--help]          Get a description and instructions for this command.
+-p [--password]      The new password.                                   
+
+Arguments (positional):
+
+ACCOUNTNAME          Account name.                                       
+ACCOUNTAUTH          Account password/authorization.                     
+
+
+------------------
