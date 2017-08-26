@@ -20,8 +20,7 @@ export default class App extends Component {
         <Header className="header" history={history} />
         <div className="container">{children ? children : <Index />}</div>
         <footer className="copy-right text-center">
-          <p>捐助ETP: MQwCDbYNSvTpPTSiuxJ4uZU3kB9aq3xNnu</p>
-          <p>本站为非元界官方网站，QQ:472811737</p>
+          
         </footer>
       </div>
     );
