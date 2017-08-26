@@ -34,14 +34,14 @@ const loopBlock = async (height) => {
         address: []
     };
     res.day = moment(res.date).format('YYYY-MM-DD');
-
+    console.log(height);
+    const today = moment().format('YYYY-MM-DD');
     txs.map(item => {
         const tx = utils.convertTx(item);
         if (utils.isRewardTx(tx)) {
             // console.log('奖励: ', utils.countTransferAmount(tx));
         } else {
             const ts = utils.countTransferAmount(tx);
-            console.log(ts);
             res.volume_data = ts;
             res.volume += ts.etp || 0;
             const countObj = {};
@@ -50,8 +50,6 @@ const loopBlock = async (height) => {
         }
     });
 
-    const today = moment().format('YYYY-MM-DD');
-    console.log('height:', height);
     if (!result.day) {
         result = Object.assign({}, res);
         result.start_block = height;
@@ -81,8 +79,10 @@ const loopBlock = async (height) => {
         result.avg_difficulty = parseInt(result.avg_difficulty / result.block_count);
         result.tx_count_data = JSON.stringify(result.tx_count_data);
         result.volume_data = JSON.stringify(result.volume_data);
+        result.volume = '' + result.volume;
+        result.avg_difficulty = '' + result.avg_difficulty
         result.update_time = new Date();
-        result.date = new Date(result.day);
+        result.date = result.day; //new Date().format('YYYY-MM-DD');
         console.log('一天的数据完了：', result);
 
         fs.writeFileSync(path.join(__dirname, './step.json'), JSON.stringify(result));
