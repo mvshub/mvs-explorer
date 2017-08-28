@@ -165,7 +165,7 @@ module.exports = {
             }
         })
         ctx.body = {
-            assests: [
+            assets: [
                 {symbol: 'ETP', name: '熵', maximum_supply: '100000000', site: 'http://mvs.live'}
             ].concat(res)
         }; 

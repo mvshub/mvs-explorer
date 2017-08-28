@@ -30,8 +30,14 @@ export default class Assets extends Component {
       key: 'name'
     }, {
       title: '发行量',
-      dataIndex: 'total',
-      key: 'total'
+      dataIndex: 'maximum_supply',
+      key: 'maximum_supply',
+      render: (val, record) => {
+        if (record.decimal_number && record.decimal_number > 0) {
+          return Number(val) / Math.pow(10, record.decimal_number);
+        }
+        return val;
+      }
     }, {
       title: '官网',
       dataIndex: 'site',
@@ -47,7 +53,7 @@ export default class Assets extends Component {
     const state = this.state;
     return (
       <div className="assets-page">
-        <h3>元界资产名词</h3>
+        <h3>元界资产列表</h3>
         <Table dataSource={state.list} columns={this.getColumns()} pagination={false} />
       </div>
     );
