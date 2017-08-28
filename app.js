@@ -5,7 +5,6 @@ const staticServer = require('koa-static');
 const Mvs = require('mvs-rpc');
 const db = require('./server/models');
 const koaBody = require('koa-body');
-const later = require('later');
 const config = require('./server/config');
 
 const app = new Koa();
@@ -61,9 +60,16 @@ app.listen(3080, () => {
   console.log('server listening port 3080');
 });
 
-// 运行统计任务
+// 运行统计任务, 每天1-2点之间执行
 if (config.schedule) {
   const dayLoop = require('./server/script/day_count');
-  const sched = later.parse.recur().on(config.schedule).time();
-  later.setInterval(dayLoop, sched);
+  // const sched = later.parse.recur().on(config.schedule).time();
+  // later.setInterval(dayLoop, sched);
+  setInterval(() => {
+    const time = new Date();
+    const hour = time.getHours();
+    if (hour > 1 && hour < 2) {
+      dayLoop();
+    }
+  }, 1000 * 60 * 60);
 }
