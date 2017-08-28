@@ -20,6 +20,11 @@ export const getAddressDetail = (num, page) => (
   axios.get(`/api/address/${num}?page=${page}`)
 );
 
+export const getAssets = (num, page) => (
+  axios.get(`/api/assets`)
+);
+
+
 export const getLatesChart = (day = 100) => (
   axios.get(`/api/dayreport?day=${day}`)
 );

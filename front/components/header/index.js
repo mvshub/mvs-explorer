@@ -52,7 +52,7 @@ export default class Header extends Component {
         </div>
         <div className="menus">
         <Link to="/charts">图表</Link>
-          <Link to="/assets">资产名词</Link>
+          <Link to="/assets">资产列表</Link>
         </div>
       </header>
     );

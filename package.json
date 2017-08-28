@@ -4,7 +4,7 @@
   "description": "mymvs",
   "main": "app.js",
   "scripts": {
-    "server": "export NODE_SERVER=true && pm2 start app.js -n mymvs --watch",
+    "server": "export NODE_SERVER=true NODE_ENV=development && pm2 start app.js -n mymvs --watch",
     "dev": "NODE_ENV='development' webpack-dev-server --config ./webpack/webpack.config.dev.js",
     "release": "NODE_ENV='production' BETA=false webpack --progress --display-error-details --color --profile --config ./webpack/webpack.config.prod.js",
     "dll": "webpack --progress --display-error-details --color --profile --config ./webpack/webpack.config.dll.js",
@@ -34,7 +34,7 @@
     "koa-static": "^4.0.0",
     "later": "^1.2.0",
     "moment": "2.18.1",
-    "mvs-rpc": "^1.0.0",
+    "mvs-rpc": "1.0.1",
     "nedb": "^1.8.0",
     "qs": "6.4.0",
     "react": "15.4.2",

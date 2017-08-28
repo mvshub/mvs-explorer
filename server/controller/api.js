@@ -2,6 +2,7 @@ const config = require('../config');
 const utils = require('../utils');
 const moment = require('moment');
 const request = require('request-promise-native');
+const assetsConfig = require('../config/assets');
 
 module.exports = {
     index: async (ctx, next) => {
@@ -153,6 +154,21 @@ module.exports = {
             }
         }; 
         
+        return next();
+    },
+
+    assets:  async(ctx, next) => {
+        const res = await ctx.app.mvs.listassets();
+        res.forEach(item => {
+            if (assetsConfig[item.symbol]) {
+                Object.assign(item, assetsConfig[item.symbol]);
+            }
+        })
+        ctx.body = {
+            assests: [
+                {symbol: 'ETP', name: '熵', maximum_supply: '100000000', site: 'http://mvs.live'}
+            ].concat(res)
+        }; 
         return next();
     },
 

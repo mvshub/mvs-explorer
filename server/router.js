@@ -8,7 +8,9 @@ router.get('/api/current', api.current);
 router.get('/api/block/:id', api.block);
 router.get('/api/tx/:id', api.tx);
 router.get('/api/address/:id', api.address);
+router.get('/api/assets', api.assets);
 router.get('/api/test', api.index);
+
 
 router.get('/api/dayreport', api.dayReport);
 

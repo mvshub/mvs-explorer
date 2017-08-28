@@ -11,13 +11,13 @@ export default class Assets extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      list: [
-          {symbol: 'ETP', name: '熵', total: '1亿', site: 'http://mvs.live'},
-          {symbol: 'MVS.ZGC', name: '黄金链', total: '1亿', site: 'http://zengold.org'},
-          {symbol: 'CMC', name: '云链代币', total: '未知', site: 'http://www.cloudchain.vip/'},
-          {symbol: 'TEA', name: '茶链', total: '未知', site: ''},
-      ],
+      list: [],
     };
+    Api.getAssets().then(res => {
+      this.setState({
+        list: res.assets
+      });
+    });
   }
   getColumns() {
     return [{
@@ -37,6 +37,10 @@ export default class Assets extends Component {
       dataIndex: 'site',
       key: 'site',
       render: (val) => <a href={val} target="_blank">{val}</a>
+    }, {
+      title: '描述',
+      dataIndex: 'description',
+      key: 'description'
     }];
   }
   render() {

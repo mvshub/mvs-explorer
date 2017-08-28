@@ -37,7 +37,7 @@ app.use(staticServer('./dist/'));
 const pug = new Pug({
   pretty: true,
   locals: {
-    
+    isDev: process.env.NODE_ENV === 'development'
   },
   viewPath: './server/views/'
 });
