@@ -94,15 +94,15 @@ export default class Index extends Component {
       {current ? <div className="currentOverview">
         <div className="item">
           <h5>当前难度</h5>
-          <p>{current.difficult} T</p>
+          <p>{current.difficult || '~'} T</p>
         </div>
         <div className="item">
           <h5>当前算力</h5>
-          <p>{current.rate} GH</p>
+          <p>{current.rate || '~'} GH</p>
         </div>
         <div className="item">
           <h5>ETP价格</h5>
-          <p>¥ {current.price}</p>
+          <p>¥ {current.price || '~'}</p>
         </div>
       </div> : null}
       <div className="latest-top">
