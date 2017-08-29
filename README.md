@@ -1,6 +1,17 @@
 # MVS区块浏览器
 [www.mymvs.info](http://www.mymvs.info)
 
+## 技术方案
+服务端： nodejs, koa, nedb
+
+前端页面：react, dva, ant.design
+
+## 目录说明
+- /server 服务端代码
+- /front 前端页面代码
+- /webpack 前端开发和构建的webpack配置
+- /dist 前端代码部署目录
+
 ## 环境配置
 
 ```
