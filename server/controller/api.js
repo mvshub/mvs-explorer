@@ -104,18 +104,7 @@ module.exports = {
             }; 
             return next();
         }
-        const list = [];
-        const hasMap = [];
-        tx.forEach(item => {
-            if (item.received && !hasMap[item.received.hash]) {
-                list.push(item.received);
-                hasMap[item.received.hash] = true;
-            }
-            if (item.spent && !hasMap[item.spent.hash]) {
-                list.push(item.spent);
-                hasMap[item.spent.hash] = true;
-            }
-        });
+        const list = utils.listTxHash(tx);
         list.sort((i1, i2) => parseInt(i2.height, 10) - parseInt(i1.height, 10));
         const pageList = [];
         const page = parseInt(ctx.query.page, 10) || 1;
@@ -145,6 +134,39 @@ module.exports = {
             }
         }; 
         
+        return next();
+    },
+
+    addressTx: async(ctx, next) => {
+        const address = ctx.query.id;
+        const type = ctx.query.type || '';
+        const tx = await ctx.app.mvs.history(address);
+        if (!tx) {
+            ctx.body = {
+                msg: '未查询到交易'
+            }; 
+            return next();
+        }
+        const list = utils.listTxHash(tx);
+        list.sort((i1, i2) => parseInt(i2.height, 10) - parseInt(i1.height, 10));
+        // const pageList = [];
+        // const page = parseInt(ctx.query.page, 10) || 1;
+        // const start = (page - 1) * 10;
+        // for(let i = 0; i < 10; i++) {
+        //     const item = list[start + i];
+        //     if (item) {
+        //         const txDetail = await ctx.app.mvs.tx(item.hash);
+        //         const blockDetail = await ctx.app.mvs.heightHeader(item.height);
+        //         if (blockDetail) {
+        //             txDetail.time_stamp = blockDetail.time_stamp;
+        //             txDetail.block_height = item.height;
+        //         }
+        //         pageList.push(utils.convertTx(txDetail));
+        //     }
+        // }
+        ctx.body = {
+            result: list
+        }; 
         return next();
     },
 

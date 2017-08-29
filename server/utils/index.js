@@ -63,5 +63,29 @@ module.exports = {
             });
         });
         return Object.keys(res);
+    },
+    listTxHash(tx) {
+        const list = [];
+        const hasMap = [];
+        tx.forEach(item => {
+            if (item.received && !hasMap[item.received.hash]) {
+                list.push(item.received);
+                hasMap[item.received.hash] = true;
+            }
+            if (item.spent && !hasMap[item.spent.hash]) {
+                list.push(item.spent);
+                hasMap[item.spent.hash] = true;
+            }
+        });
+        return list;
+    },
+    isNormalTx(tx) {
+
+    },
+    isMiningTx(tx) {
+
+    },
+    isDepositTx(tx){
+        // tx.outputs
     }
 }

@@ -5,6 +5,46 @@ import { formatAssetValue, formatTime } from '@/utils';
 
 import './style.less';
 
+const TxType = [
+  <Tag color="#fadb0a">挖矿奖励</Tag>,
+  <Tag color="#00a854">收入</Tag>,
+  <Tag color="#fa4141">支出</Tag>,
+  <Tag color="#1aa4fc">存款</Tag>
+];
+
+function getTxType(tx, address) {
+  const inputAddress = {};
+  const outputAddress = {};
+  tx.inputs.forEach(inItem => {
+    if (item.address) {
+      inputAddress[item.address] = true;
+    }
+  });
+  tx.outputs.forEach(item => {
+    if (item.address) {
+      outputAddress[item.address] = true;
+    }
+  });
+  const deposit = false;
+  tx.outputs.forEach(item => {
+    if (item.script.indexOf('numequalverify') > -1) {
+      deposit = true;
+    }
+  });
+  if (deposit) {
+    return TxType[3];
+  }
+  if (Object.keys(inputAddress) == 0 && outputAddress[address]) {
+    return TxType[0];
+  }
+  if (!inputAddress[address] && outputAddress[address]) {
+    return TxType[1];
+  }
+  if (inputAddress[address] && !outputAddress[address]) {
+    return TxType[2];
+  }
+}
+
 export default class TxList extends Component {
   renderInput(data, index) {
     const { showScript } = this.props;
