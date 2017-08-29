@@ -6,16 +6,7 @@ const assetsConfig = require('../config/assets');
 
 module.exports = {
     index: async (ctx, next) => {
-        // console.log(0)
-        // const res = await ctx.app.mvs.heightHeader(374879);
-        // console.log(res);
-        // const res = await ctx.app.mvs.balance('MBmaAn2zpTC8GRkNLa6smCMvtAhbYF8EBo');
-        // const res = await ctx.app.mvs.height();
-        // const res = await ctx.app.mvs.history('MKJutYPKjwmjg8PRPgmxB27LtiXWY6pPJ6');
-
-        // const res = await ctx.app.mvs.tx('0f8cdfbd725d61a75683d3479cbad4d50e5a9d6665aacd78e37d0102a5e6550a');
-
-        ctx.body = res;
+        ctx.body = 'test';
         return next();
     },
 
@@ -50,7 +41,7 @@ module.exports = {
                 price = priceRes.result.filter(item => item.market === 'ETPCNY')[0].last;
             }
         } catch(e) {
-            console.log(e);
+            // console.log(e);
         }
         ctx.body = {
             difficult: lastHead.bits,

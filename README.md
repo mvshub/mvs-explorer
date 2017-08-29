@@ -60,8 +60,7 @@ pm2 start ecosystem.config.js
 
 可通过server/config/index.js文件中的字段配置
 ```
-schedule: '01:00:00'
-// 默认每天1点运行
+schedule: true
 //可关闭 schedule = false
 ```
 
