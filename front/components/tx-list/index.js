@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'dva/router';
 import { Row, Col, Icon, Tag } from 'antd';
-import { formatAssetValue, formatTime } from '@/utils';
+import { formatAssetValue, formatTime, parseLockHeight } from '@/utils';
 
 import './style.less';
 
@@ -9,13 +9,17 @@ const TxType = [
   <Tag color="#fadb0a">挖矿奖励</Tag>,
   <Tag color="#00a854">收入</Tag>,
   <Tag color="#fa4141">支出</Tag>,
-  <Tag color="#1aa4fc">存款</Tag>
+  <Tag color="#1aa4fc">存款</Tag>,
+  <Tag color="#1aa4fc">存款-存入</Tag>,
+  <Tag color="#1aa4fc">存款-支出</Tag>,
+  <Tag color="#1aa4fc">存款-利息</Tag>
 ];
 
 function getTxType(tx, address) {
   const inputAddress = {};
   const outputAddress = {};
-  tx.inputs.forEach(inItem => {
+  let deposit = false;
+  tx.inputs.forEach(item => {
     if (item.address) {
       inputAddress[item.address] = true;
     }
@@ -24,24 +28,31 @@ function getTxType(tx, address) {
     if (item.address) {
       outputAddress[item.address] = true;
     }
-  });
-  const deposit = false;
-  tx.outputs.forEach(item => {
     if (item.script.indexOf('numequalverify') > -1) {
       deposit = true;
     }
   });
-  if (deposit) {
-    return TxType[3];
-  }
+  
+  //  奖励
   if (Object.keys(inputAddress) == 0 && outputAddress[address]) {
-    return TxType[0];
+    if (deposit) {
+      return 6;
+    }
+    return 0;
   }
+  //收入
   if (!inputAddress[address] && outputAddress[address]) {
-    return TxType[1];
+    if (deposit) {
+      return 4;
+    }
+    return 1;
   }
-  if (inputAddress[address] && !outputAddress[address]) {
-    return TxType[2];
+  //支出
+  if (inputAddress[address]) {
+    if (deposit) {
+      return 5;
+    }
+    return 2;
   }
 }
 
@@ -50,7 +61,7 @@ export default class TxList extends Component {
     const { showScript } = this.props;
     if (!data.address) {
       return <div key={index} className="input-row">
-        <p>挖矿新块奖励</p>
+        <p>奖励</p>
         {showScript ? <p className="script-info">输入脚本:{data.script}</p> : null}
       </div>;
     } else {
@@ -77,6 +88,7 @@ export default class TxList extends Component {
   }
   renderCount(data) {
     const { inputs, outputs } = data;
+    const { address } = this.props;
     const inputAddress = inputs.map(item => item.address);
     const outTx = outputs.filter(item => !inputAddress.includes(item.address));
     const group = {};
@@ -101,10 +113,22 @@ export default class TxList extends Component {
         outETP += item.output_value;
       }
     });
+    let label = '转账';
+    let appendDes = '';
+    if (address) {
+      const txType = getTxType(data, address);
+      label = TxType[txType];
+      if (txType == 6 || txType == 4) {
+        const lockHeight = parseLockHeight(outputs[0].script);
+        appendDes = `(解锁高度:${lockHeight})`;
+      }
+    }
     return <div className="output-count">
       <h5>总计</h5>
       {Object.keys(group).map(key => <p>
-        <span className="label">转账:</span><span style={{color: '#87d068'}}>{formatAssetValue(group[key], key)}{key}</span>
+        <span className="label">{label}:</span>
+        <span>{formatAssetValue(group[key], key)}{key}</span>
+        <span>{appendDes}</span>
       </p>)}
     </div>;
   }

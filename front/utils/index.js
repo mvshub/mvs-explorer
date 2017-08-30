@@ -1,5 +1,6 @@
 import axios from './axios.js';
 import moment from './moment.js';
+import ba from 'binascii';
 
 const initParams = (params) => {
   let args = {};
@@ -44,6 +45,22 @@ const formatAssetValue = (num, type) => {
   return num;
 }
 
+const parseLockHeight = (script) => {
+  const m = script.match(/\[ (\w+) \] numequalverify/)
+  if (!m) {
+    return 0;
+  }
+  const num = m[1];
+  const l = ba.unhexlify(num).split('');
+  let res = 0;
+  l.forEach((val, i) => {
+    res = res | (val.charCodeAt() << (8*i) );
+  });
+  if (l[l.length - 1].charCodeAt() & 0x80) {
+    res = - (res & ~ (0x80 << (8 * (l.length - 1))) )
+  }
+  return res;
+}
 export {
   axios,
   moment,
@@ -51,5 +68,6 @@ export {
   isEmptyObject,
   thousandBitSeparator,
   formatTime,
-  formatAssetValue
+  formatAssetValue,
+  parseLockHeight
 };

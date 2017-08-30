@@ -13,6 +13,9 @@ function parseLockHeight(num) {
   return res;
 }
 
-const s = '[ 7062 ] numequalverify dup hash160 [ 17c33fd450d417870f596f78a98bada7f245153c ] equalverify checksig'
+const s = '[ d00c14 ] numequalverify dup hash160 [ 17c33fd450d417870f596f78a98bada7f245153c ] equalverify checksig'
+
 console.log(parseLockHeight(s.match(/\[ (\w+) \]/)[1]));
+
+// console.log(parseLockHeight('d00c14'));
 

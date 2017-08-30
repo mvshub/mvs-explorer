@@ -68,7 +68,7 @@ if (config.schedule) {
   setInterval(() => {
     const time = new Date();
     const hour = time.getHours();
-    if (hour > 1 && hour < 2) {
+    if (hour == 1) {
       dayLoop();
     }
   }, 1000 * 60 * 60);

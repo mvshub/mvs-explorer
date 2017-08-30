@@ -113,7 +113,7 @@ export default class Address extends Component {
         <h4 style={{marginTop: '10px'}}>交易记录</h4>
         {state.loading ? <div style={{ textAlign: 'center' }}><Spin /></div> : null}
         {!state.loading && state.data ? <div>
-          <TxList data={state.data} noIndex />
+          <TxList data={state.data} noIndex address={state.addressId} />
           <div className="tx-pager">
             <Pagination defaultCurrent={1} total={state.details.transactions} current={state.page} pageSize={10} onChange={this.pageChange} />
           </div>

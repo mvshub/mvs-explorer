@@ -17,7 +17,7 @@ module.exports = merge(webpackBaseConfig, {
       'react-hot-loader/patch',
       // activate HMR for React
 
-      'webpack-dev-server/client?http://local.mymvs.info',
+      'webpack-dev-server/client?http://localhost',
       // bundle the client for webpack-dev-server
       // and connect to the provided endpoint
 
