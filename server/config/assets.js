@@ -3,7 +3,7 @@ module.exports = {
     name: '黄金链', 
     site: 'http://zengold.org'
   },
-  'ZEN.DAO': {
+  'MVS.ZDC': {
     name: '承道', 
     site: 'http://zendao.org'
   },
@@ -15,7 +15,7 @@ module.exports = {
     site: 'http://www.yunbtc123.com/'
   },
   'CMC': {
-    name: '云宝',
-    site: 'http://www.yunbtc123.com/'
+    name: '云链',
+    site: 'http://www.cloudchain123.com'
   }
 }

@@ -33,7 +33,8 @@ const formatTime = (num) => {
 const assetValueMap = {
   'etp': (val) => (val/100000000).toFixed(8),
   'mvs.zgc': (val) => (val/100000000).toFixed(8),
-  'cmc': (val) => (val/10000).toFixed(4)
+  'cmc': (val) => (val/10000).toFixed(4),
+  'mvs.zdc': (val) => (val/10000).toFixed(6)
 }
 const formatAssetValue = (num, type) => {
   if (type) {
