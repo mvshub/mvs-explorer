@@ -215,7 +215,6 @@ module.exports = {
         }
         const { lastFreeTime, freeHistory } = ctx.app;
         const balance = await ctx.app.mvs.balance(body.address);
-        console.log(balance, balance.unspent > 10000);
         if (balance.unspent > 10000) {
             ctx.body = {
                 msg: '兄台，你地址中还有余额，不用领取.'
@@ -247,6 +246,9 @@ module.exports = {
             value: FreeValues[body.value],
             time: Date.now()
         });
+        if (ctx.app.freeHistory.length > 50) {
+            ctx.app.freeHistory.shift();
+        }
         return next();
     },
 

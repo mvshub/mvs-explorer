@@ -18,7 +18,7 @@ export default class Free extends Component {
     super(props)
     this.state = {
       value: '1',
-      list: [],
+      address: ''
     };
     this.loadHistory();
 
@@ -66,7 +66,7 @@ export default class Free extends Component {
     });
   }
   render() {
-    const { freeHistory, value } = this.state;
+    const { freeHistory, value, address } = this.state;
     return (
       <div className="free-page">
         <h3>免费领币</h3>
@@ -84,7 +84,7 @@ export default class Free extends Component {
               <Option value="1">0.0002</Option>
               <Option value="2">0.0003</Option>
             </Select>
-            <Input style={{ width: '50%' }} onChange={this.handleChange} placeholder="ETP接收地址" />
+            <Input style={{ width: '50%' }} onChange={this.handleChange} placeholder="ETP接收地址" value={address} />
             <Button type="primary" size="large" className="btn" onClick={this.send}>领取</Button>
           </InputGroup>
         </div>
