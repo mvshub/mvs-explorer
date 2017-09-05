@@ -10,6 +10,8 @@ router.get('/api/tx/:id', api.tx);
 router.get('/api/address-tx', api.addressTx);
 router.get('/api/address/:id', api.address);
 router.get('/api/assets', api.assets);
+router.post('/api/free-send', api.freeSend);
+router.get('/api/free-history', api.freeHistory);
 router.get('/api/test', api.index);
 
 

@@ -8,6 +8,7 @@ import Transaction from './routes/Transaction';
 import Address from './routes/Address';
 import Assets from './routes/Assets';
 import Charts from './routes/Charts';
+import Free from './routes/Free';
 
 const route = <Route path="/" component={App}>
   <Route path="index" component={Index} />
@@ -16,6 +17,7 @@ const route = <Route path="/" component={App}>
   <Route path="address/:id" component={Address} />
   <Route path="assets" component={Assets} />
   <Route path="charts" component={Charts} />
+  <Route path="free" component={Free} />
   <Route path="*" component={Index} />
 </Route>;
 

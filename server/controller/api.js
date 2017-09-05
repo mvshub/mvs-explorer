@@ -4,6 +4,11 @@ const moment = require('moment');
 const request = require('request-promise-native');
 const assetsConfig = require('../config/assets');
 
+const FreeValues = {
+    '1': 20000,
+    '2': 30000
+}
+
 module.exports = {
     index: async (ctx, next) => {
         ctx.body = 'test';
@@ -198,6 +203,60 @@ module.exports = {
         });
         ctx.body = {
             data: list.reverse()
+        };
+        return next();
+    },
+
+    freeSend: async(ctx, next) => {
+        const body = ctx.request.body;
+        const freeAccount = config.freeAccount;
+        if (!body.value) {
+            body.value = '1';
+        }
+        const { lastFreeTime, freeHistory } = ctx.app;
+        const balance = await ctx.app.mvs.balance(body.address);
+        console.log(balance, balance.unspent > 10000);
+        if (balance.unspent > 10000) {
+            ctx.body = {
+                msg: '兄台，你地址中还有余额，不用领取.'
+            };
+            return next();
+        }
+        if (lastFreeTime && Date.now() - lastFreeTime < 10000) {
+            ctx.body = {
+                msg: '刚有个哥们领取了一点，客官请稍等一会再领吧.'
+            };
+            return next();
+        }
+        const res = await ctx.app.mvs.callMethod('send', [
+            freeAccount.accont,
+            freeAccount.password,
+            body.address,
+            FreeValues[body.value]
+        ]);
+        ctx.body = {
+            data: body,
+            transaction: res.transaction
+        };
+        ctx.app.lastFreeTime = Date.now();
+        if (!freeHistory) {
+            ctx.app.freeHistory = [];
+        }
+        ctx.app.freeHistory.push({
+            address: body.address,
+            value: FreeValues[body.value],
+            time: Date.now()
+        });
+        return next();
+    },
+
+    freeHistory: async(ctx, next) => {
+        const balance = await ctx.app.mvs.balance(config.freeAccount.address);
+        ctx.body = {
+            data: {
+                balance: balance.unspent,
+                history: ctx.app.freeHistory || []
+            }
         };
         return next();
     }

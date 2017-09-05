@@ -51,8 +51,9 @@ export default class Header extends Component {
           <Search placeholder="地址/哈希/区块" onSearch={this.search} />
         </div>
         <div className="menus">
-        <Link to="/charts">图表</Link>
+          <Link to="/charts">图表</Link>
           <Link to="/assets">资产列表</Link>
+          <Link to="/free">免费领币</Link>
         </div>
       </header>
     );

@@ -28,3 +28,11 @@ export const getAssets = (num, page) => (
 export const getLatesChart = (day = 100) => (
   axios.get(`/api/dayreport?day=${day}`)
 );
+
+export const getFreeHistory = () => (
+  axios.get(`/api/free-history`)
+);
+
+export const freeSend = (data) => (
+  axios.post(`/api/free-send`, data)
+);
