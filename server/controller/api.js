@@ -257,7 +257,7 @@ module.exports = {
         ctx.body = {
             data: {
                 balance: balance.unspent,
-                history: ctx.app.freeHistory || []
+                history: ctx.app.freeHistory ? ctx.app.freeHistory.reverse() : []
             }
         };
         return next();
