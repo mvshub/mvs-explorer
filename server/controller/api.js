@@ -221,12 +221,15 @@ module.exports = {
             };
             return next();
         }
+        // 至少隔10s才能发放一笔
         if (lastFreeTime && Date.now() - lastFreeTime < 10000) {
             ctx.body = {
-                msg: '刚有个哥们领取了一点，客官请稍等一会再领吧.'
+                msg: '刚有个哥们领取了一次，客官请稍等一会再领吧.'
             };
             return next();
         }
+        // 记录本地执行领取的时间
+        ctx.app.lastFreeTime = Date.now();
         const res = await ctx.app.mvs.callMethod('send', [
             freeAccount.accont,
             freeAccount.password,
@@ -237,7 +240,6 @@ module.exports = {
             data: body,
             transaction: res.transaction
         };
-        ctx.app.lastFreeTime = Date.now();
         if (!freeHistory) {
             ctx.app.freeHistory = [];
         }
