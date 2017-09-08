@@ -214,13 +214,6 @@ module.exports = {
             body.value = '1';
         }
         const { lastFreeTime, freeHistory } = ctx.app;
-        const balance = await ctx.app.mvs.balance(body.address);
-        if (balance.unspent > 10000) {
-            ctx.body = {
-                msg: '兄台，你地址中还有余额，不用领取.'
-            };
-            return next();
-        }
         // 至少隔10s才能发放一笔
         if (lastFreeTime && Date.now() - lastFreeTime < 10000) {
             ctx.body = {
@@ -230,6 +223,13 @@ module.exports = {
         }
         // 记录本地执行领取的时间
         ctx.app.lastFreeTime = Date.now();
+        const balance = await ctx.app.mvs.balance(body.address);
+        if (balance.unspent > 10000) {
+            ctx.body = {
+                msg: '兄台，你地址中还有余额，不用领取.'
+            };
+            return next();
+        }
         const res = await ctx.app.mvs.callMethod('send', [
             freeAccount.accont,
             freeAccount.password,
