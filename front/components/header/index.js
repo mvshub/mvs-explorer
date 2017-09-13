@@ -15,6 +15,7 @@ export default class Header extends Component {
     if (val == undefined || val  == '') {
       return;
     }
+    val = val.trim();
     const len = val.length; 
     const { history } = this.props;
     if (len == 34) {
