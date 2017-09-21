@@ -6,7 +6,6 @@ import * as Api from '@/service';
 import { moment, formatTime } from '@/utils';
 import createG2 from 'g2-react';
 import { Stat } from 'g2';
-import numeral from 'numeral';
 
 const Line = createG2(chart => {
   chart.line().position('date*tx_count');
