@@ -6,6 +6,7 @@ import * as Api from '@/service';
 import { moment, formatTime } from '@/utils';
 import createG2 from 'g2-react';
 import { Stat } from 'g2';
+import numeral from 'numeral';
 
 const Line = createG2(chart => {
   chart.line().position('date*tx_count');
@@ -50,7 +51,7 @@ export default class Index extends Component {
         current: {
           difficult: (res.difficult / 1000000000000).toFixed(2),
           rate: (res.rate / 1000000000).toFixed(2),
-          price: res.price / 100000000
+          price: res.price.toFixed(2)
         }
       });
     });
@@ -102,7 +103,10 @@ export default class Index extends Component {
         </div>
         <div className="item">
           <h5>ETP价格</h5>
-          <p>¥ {current.price || '~'}</p>
+          <p>
+            <span>¥ {current.price || '~'}</span>
+            <span className="cap">(总市值：¥{current.cap})</span>
+          </p>
         </div>
       </div> : null}
       <div className="latest-top">

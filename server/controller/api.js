@@ -37,13 +37,17 @@ module.exports = {
         const lastHeight = await ctx.app.mvs.height();
         let lastHead = await ctx.app.mvs.heightHeader(lastHeight);
         let price = '~';
+        let cap = '~';
+        let volume = '~';
         try {
-            const priceRes = await request.get('https://szzc.com/api/public/tickers', {
+            const priceRes = await request.get('https://api.coinmarketcap.com/v1/ticker/metaverse/?convert=CNY', {
                 json: true,
                 timeout: 1000 * 10
             });
-            if (priceRes && priceRes.status && priceRes.status.success === 1) {
-                price = priceRes.result.filter(item => item.market === 'ETPCNY')[0].last;
+            if (priceRes && priceRes[0]) {
+                price = priceRes[0].price_cny;
+                cap = priceRes[0].market_cap_cny;
+                volume = priceRes[0]['24h_volume_cny'];
             }
         } catch(e) {
             // console.log(e);
@@ -51,7 +55,9 @@ module.exports = {
         ctx.body = {
             difficult: lastHead.bits,
             rate: lastHead.bits / 14.4,
-            price: price
+            price,
+            cap,
+            volume
         };
         return next();
     },
