@@ -22,6 +22,14 @@ export default class App extends Component {
         <footer className="copy-right text-center">
           
         </footer>
+        <div className="footer-links">
+          <a href="http://mvs.live/" target="_blank">Metaverse</a>
+          <a href="http://explorer.mvs.live/" target="_blank">官方区块浏览器</a>
+          <a href="http://etp.uupool.cn/pool/etp" target="_blank">双优矿池</a>
+          <a href="https://tokenmaster.info/" target="_blank">TokenMaster</a>
+          <a href="https://www.bitfinex.com/" target="_blank">Bitfinex</a>
+          <a href="https://www.rightbtc.com/" target="_blank">rightbtc</a>
+        </div>
       </div>
     );
   }
