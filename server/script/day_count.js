@@ -11,7 +11,7 @@ const connect = require('camo').connect;
 
 
 const mvs = new Mvs(config.rpcServer);
-const stepLog = require('./step.json');
+
 
 let result = {};
 
@@ -103,5 +103,7 @@ const loopBlock = async (height) => {
 
 module.exports = (db) => {
     result = {};
+    let stepLog = fs.readFileSync(path.join(__dirname, './step.json'), 'utf-8');
+    stepLog = JSON.parse(stepLog);
     loopBlock(stepLog.end_block + 1);
 }
