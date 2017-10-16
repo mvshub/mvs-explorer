@@ -24,7 +24,7 @@ export default class App extends Component {
         </footer>
         <div className="footer-links">
           <div className="link-group">
-            <h3>官网网站</h3>
+            <h3>官方网站</h3>
             <div>
               <a href="http://mvs.live/" target="_blank">Metaverse</a>
               <a href="http://explorer.mvs.live/" target="_blank">区块浏览</a>

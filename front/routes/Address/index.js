@@ -16,8 +16,10 @@ export default class Address extends Component {
       list: null,
       loading: true,
       details: null,
+      totalPage: 1,
       addressId: props.params.id,
       page: 1,
+      data: [],
       assests: []
     };
     this.loadData(this.state.addressId, 1);
@@ -45,7 +47,9 @@ export default class Address extends Component {
           loading: false,
           data: res.result.txs,
           details: res.result.details,
-          assests: res.result.assests || []
+          assests: res.result.assests || [],
+          page,
+          totalPage: res.result.totalPage
         });
       } else if (res.msg) {
         this.setState({
@@ -59,9 +63,6 @@ export default class Address extends Component {
     });
   }
   pageChange(page) {
-    this.setState({
-      page
-    });
     this.loadData(this.state.addressId , page);
   }
   renderPageList() {
@@ -88,7 +89,7 @@ export default class Address extends Component {
               </Row>
               <Row>
                 <Col span={4}>总交易数</Col>
-                <Col span={20}>{state.details ? state.details.transactions : 0} </Col>
+                <Col span={20}>{state.totalPage > 1 ? '大于100' : state.data.length} </Col>
               </Row>
               <Row>
                 <Col span={4}>资产</Col>
@@ -115,7 +116,7 @@ export default class Address extends Component {
         {!state.loading && state.data ? <div>
           <TxList data={state.data} noIndex address={state.addressId} />
           <div className="tx-pager">
-            <Pagination defaultCurrent={1} total={state.details.transactions} current={state.page} pageSize={10} onChange={this.pageChange} />
+            <Pagination defaultCurrent={1} total={state.totalPage * 100} current={state.page} pageSize={100} onChange={this.pageChange} />
           </div>
         </div> : null}
         {!state.loading && state.msg ?  state.msg : null}
