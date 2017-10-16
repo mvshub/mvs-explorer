@@ -40,9 +40,30 @@ footer{
  }
 
  .footer-links{
-   padding:20px 0;
+   padding:20px 10%;
    text-align: center;
+   display: flex;
+   background: #e3eff5;
+   color:#004a7c;
+   overflow: scroll;
+   h3{
+     font-size: 16px;
+     font-weight: normal;
+     border-bottom: 1px solid #004a7c;
+     color:#004a7c;
+     padding-bottom: 4px;
+   }
    a{
-     margin:0 10px;
+     display: block;
+     color:#004a7c;
+     margin-bottom: 10px;
+   }
+  .link-group{
+    flex: 1;
+    text-align: left;
+    margin-right: 40px;
+    &:last-child{
+      margin:0;
+    }
    }
  }
