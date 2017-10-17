@@ -112,14 +112,15 @@ module.exports = {
         let txRes;
         let txCount = 0;
         const start = Date.now();
+        const pageItems = 100;
         try {
-            txRes = await ctx.app.mvs.callMethod('listtxs', ['-i', 50, '-l', 1, '-a', id, config.freeAccount.accont, config.freeAccount.password]);
+            txRes = await ctx.app.mvs.callMethod('listtxs', ['-i', 1, '-l', pageItems, '-a', id, config.freeAccount.accont, config.freeAccount.password]);
         } catch(e) {
             console.log(e);
         }
         if (txRes) {
-            txRes = await ctx.app.mvs.callMethod('listtxs', ['-i', txRes.total_page, '-l', 1, '-a', id, config.freeAccount.accont, config.freeAccount.password]);
-            txCount = (parseInt(txRes.total_page, 10) - 1) * 50 + parseInt(txRes.transaction_count, 10);
+            txRes = await ctx.app.mvs.callMethod('listtxs', ['-i', txRes.total_page, '-l', pageItems, '-a', id, config.freeAccount.accont, config.freeAccount.password]);
+            txCount = (parseInt(txRes.total_page, 10) - 1) * pageItems + parseInt(txRes.transaction_count, 10);
         }
 
         // 获取其它资产
