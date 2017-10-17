@@ -20,9 +20,11 @@ export default class Address extends Component {
       addressId: props.params.id,
       page: 1,
       data: [],
-      assests: []
+      assests: [],
+      txCount: 0
     };
     this.loadData(this.state.addressId, 1);
+    this.loadOverview(this.state.addressId);
     this.pageChange = this.pageChange.bind(this);
   }
   componentWillReceiveProps(nextProps) {
@@ -34,20 +36,28 @@ export default class Address extends Component {
         details: null,
         addressId: nextProps.params.id
       });
+      this.loadOverview(nextProps.params.id);
       this.loadData(nextProps.params.id, 1);
     }
+  }
+  loadOverview(id) {
+    Api.getAddressOverview(id).then(res => {
+      this.setState({
+        details: res.result.details,
+        assests: res.result.assests || [],
+        txCount: res.result.txCount
+      });
+    });
   }
   loadData(id, page) {
     this.setState({
       loading: true
     });
-    Api.getAddressDetail(id, page).then(res => {
+    Api.getAddressTx(id, page).then(res => {
       if (res.result) {
         this.setState({
           loading: false,
           data: res.result.txs,
-          details: res.result.details,
-          assests: res.result.assests || [],
           page,
           totalPage: res.result.totalPage
         });
@@ -59,7 +69,6 @@ export default class Address extends Component {
           loading: false
         });
       }
-      
     });
   }
   pageChange(page) {
@@ -74,6 +83,7 @@ export default class Address extends Component {
   }
   render() {
     const state = this.state;
+    console.log(state);
     return (
       <div className="address-detail">
         <Row>
@@ -84,12 +94,20 @@ export default class Address extends Component {
                 <Col span={20}>{state.addressId} </Col>
               </Row>
               <Row>
-                <Col span={4}>余额</Col>
+                <Col span={4}>可用余额</Col>
                 <Col span={20}>{state.details ? formatAssetValue(state.details.unspent, 'ETP') : 0}ETP </Col>
               </Row>
               <Row>
+                <Col span={4}>总计接收</Col>
+                <Col span={20}>{state.details ? formatAssetValue(state.details.received, 'ETP') : 0}ETP </Col>
+              </Row>
+              <Row>
+                <Col span={4}>冻结</Col>
+                <Col span={20}>{state.details ? formatAssetValue(state.details.frozen, 'ETP') : 0}ETP </Col>
+              </Row>
+              <Row>
                 <Col span={4}>总交易数</Col>
-                <Col span={20}>{state.totalPage > 1 ? '大于100' : state.data.length} </Col>
+                <Col span={20}>{state.txCount} </Col>
               </Row>
               <Row>
                 <Col span={4}>资产</Col>
