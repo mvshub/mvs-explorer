@@ -16,8 +16,12 @@ export const getTxDetail = (num) => (
   axios.get(`/api/tx/${num}`)
 );
 
-export const getAddressDetail = (num, page) => (
-  axios.get(`/api/address/${num}?page=${page}`)
+export const getAddressOverview = (num, page) => (
+  axios.get(`/api/address/${num}`)
+);
+
+export const getAddressTx = (num, page) => (
+  axios.get(`/api/address-tx/${num}?page=${page}`)
 );
 
 export const getAssets = (num, page) => (

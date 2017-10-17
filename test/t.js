@@ -1,37 +1,111 @@
-// var ba = require('binascii');
+Usage: help COMMAND
+Version: 0.6.10
+Info: The commands are:
 
+== original commands ==
+  seed
+  ec-to-address
+  ec-to-public
+  fetch-balance
+  fetch-header
+  fetch-height
+  fetch-history
+  fetch-public-key
+  fetch-stealth
+  fetch-tx
+  fetch-tx-index
+  fetch-utxo
+  hd-new
+  hd-private
+  hd-to-ec
+  hd-to-public
+  help
+  input-set
+  input-sign
+  input-validate
+  mnemonic-new
+  mnemonic-to-seed
+  send-tx
+  settings
+  stealth-decode
+  stealth-encode
+  stealth-public
+  stealth-secret
+  stealth-shared
+  tx-decode
+  tx-encode
+  tx-sign
+  validate-tx
 
-// function parseLockHeight(num) {
-//   const l = ba.unhexlify(num).split('');
-//   let res = 0;
-//   l.forEach((val, i) => {
-//     res = res | (val.charCodeAt() << (8*i) );
-//   });
-//   if (l[l.length - 1].charCodeAt() & 0x80) {
-//     res = - (res & ~ (0x80 << (8 * (l.length - 1))) )
-//   }
-//   return res;
-// }
+== extension commands ==
+  stopall
+  stop
+  start
+  getinfo
+  getpeerinfo
+  ping
+  addnode
+  getmininginfo
+  getbestblockhash
+  getbestblockheader
+  fetchheaderext
+  gettransaction
+  backupwallet
+  importwallet
+  lockwallet
+  exportaccountasfile
+  importaccountfromfile
+  importaccount
+  getnewaccount
+  getaccount
+  deleteaccount
+  lockaccount
+  setaccountinfo
+  listaddresses
+  getnewaddress
+  getaddress
+  getpublickey
+  getblock
+  signmessage
+  verifymessage
+  createmultisig
+  addmultisigaddress
+  validateaddress
+  listbalances
+  getbalance
+  listtxs
+  xfetchbalance
+  xfetchutxo
+  gettx
+  getaddresstx
+  getaccounttx
+  deposit
+  send
+  sendmore
+  sendfrom
+  listassets
+  getasset
+  getaddressasset
+  getaccountasset
+  createasset
+  deleteunissuedasset
+  issue
+  issuefrom
+  sendasset
+  sendassetfrom
+  getdid
+  setdid
+  sendwithdid
+  settxfee
+  getwork
+  submitwork
+  setminingaccount
+  changepasswd
+  getnewmultisig
+  listmultisig
+  deletemultisig
+  createmultisigtx
+  signmultisigtx
+  getmemorypool
 
-// const s = '[ d00c14 ] numequalverify dup hash160 [ 17c33fd450d417870f596f78a98bada7f245153c ] equalverify checksig'
-
-// console.log(parseLockHeight(s.match(/\[ (\w+) \]/)[1]));
-
-// // console.log(parseLockHeight('d00c14'));
-
-
-const request = require('request-promise-native');
-
-
-for(let i = 0; i < 20; i++) {  
-  request({
-    method: 'POST',
-    uri: 'http://localhost:3080/api/free-send',
-    json: true,
-    body: {
-      address: 'MJjU6LkFJduYMh9qcQYQV1wbw7hxq7Fvo4',
-      value: '1'
-    }
-  }).then(res => console.log(res));
-}
-
+MVS home page: http://mvs.live

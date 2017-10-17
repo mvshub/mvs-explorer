@@ -104,11 +104,46 @@ module.exports = {
         return next();
     },
 
-    address: async(ctx, next) => {
+    addressOverview: async(ctx, next) => {
+        const id = ctx.params.id;
+        const balance = await ctx.app.mvs.callMethod('xfetchbalance', [id]);
+
+        // 计算交易记录数
+        let txRes;
+        let txCount = 0;
+        const start = Date.now();
+        const pageItems = 100;
+        try {
+            txRes = await ctx.app.mvs.callMethod('listtxs', ['-i', 1, '-l', pageItems, '-a', id, config.freeAccount.accont, config.freeAccount.password]);
+        } catch(e) {
+            console.log(e);
+        }
+        if (txRes) {
+            txRes = await ctx.app.mvs.callMethod('listtxs', ['-i', txRes.total_page, '-l', pageItems, '-a', id, config.freeAccount.accont, config.freeAccount.password]);
+            txCount = (parseInt(txRes.total_page, 10) - 1) * pageItems + parseInt(txRes.transaction_count, 10);
+        }
+
+        // 获取其它资产
+        let assests = [];
+        if (txCount < 1000) {
+            assests = await ctx.app.mvs.addressAsset(id);
+        }
+
+        ctx.body = {
+            result: {
+                time: Date.now() - start,
+                details: balance.balance,
+                assests,
+                txCount
+            }
+        }; 
+        
+        return next();
+    },
+
+    addressTx: async(ctx, next) => {
         const id = ctx.params.id;
         const page = ctx.query.page || 1;
-
-        const balance = await ctx.app.mvs.balance(id);
         let res;
         try {
             res = await ctx.app.mvs.callMethod('listtxs', ['-i', page, '-l', 100, '-a', id, config.freeAccount.accont, config.freeAccount.password]);
@@ -118,7 +153,7 @@ module.exports = {
 
         if (!res) {
             ctx.body = {
-                msg: '未查询到该地址信息'
+                msg: '未查询到该地址的交易记录'
             }; 
             return next();
         }
@@ -137,59 +172,16 @@ module.exports = {
             }
             pageList.push(utils.convertTx(txDetail));
         }
-        // balance.transactions = list.length;
-
-        // 其它资产列表
-        let assests = [];
-        if (totalPage < 2) {
-            assests = await ctx.app.mvs.addressAsset(id);
-        }
-        
         ctx.body = {
             result: {
-                details: balance,
                 page,
                 totalPage: totalPage,
                 txCount: pageList.length,
                 pageItems: 100,
-                txs: pageList,
-                assests
+                txs: pageList
             }
         }; 
         
-        return next();
-    },
-
-    addressTx: async(ctx, next) => {
-        const address = ctx.query.id;
-        const type = ctx.query.type || '';
-        const tx = await ctx.app.mvs.history(address);
-        if (!tx) {
-            ctx.body = {
-                msg: '未查询到交易'
-            }; 
-            return next();
-        }
-        const list = utils.listTxHash(tx);
-        list.sort((i1, i2) => parseInt(i2.height, 10) - parseInt(i1.height, 10));
-        // const pageList = [];
-        // const page = parseInt(ctx.query.page, 10) || 1;
-        // const start = (page - 1) * 10;
-        // for(let i = 0; i < 10; i++) {
-        //     const item = list[start + i];
-        //     if (item) {
-        //         const txDetail = await ctx.app.mvs.tx(item.hash);
-        //         const blockDetail = await ctx.app.mvs.heightHeader(item.height);
-        //         if (blockDetail) {
-        //             txDetail.time_stamp = blockDetail.time_stamp;
-        //             txDetail.block_height = item.height;
-        //         }
-        //         pageList.push(utils.convertTx(txDetail));
-        //     }
-        // }
-        ctx.body = {
-            result: list
-        }; 
         return next();
     },
 
