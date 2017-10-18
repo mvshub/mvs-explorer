@@ -94,19 +94,21 @@ export default class Address extends Component {
                 <Col span={20}>{state.addressId} </Col>
               </Row>
               <Row>
-                <Col span={4}>可用余额</Col>
-                <Col span={20}>{state.details ? formatAssetValue(state.details.unspent, 'ETP') : 0}ETP </Col>
+                <Col span={4}>余额(ETP)</Col>
+                <Col span={20} className="balance">
+                  <div>{state.details ? formatAssetValue(state.details.unspent, 'ETP') : 0}</div>
+                  <div className="extra">
+                    <p>可用: {state.details ? formatAssetValue(state.details.unspent - state.details.frozen, 'ETP') : 0}</p>
+                    <p>冻结: {state.details ? formatAssetValue(state.details.frozen, 'ETP') : 0}</p>
+                  </div>
+                </Col>
               </Row>
               <Row>
                 <Col span={4}>总计接收</Col>
                 <Col span={20}>{state.details ? formatAssetValue(state.details.received, 'ETP') : 0}ETP </Col>
               </Row>
               <Row>
-                <Col span={4}>冻结</Col>
-                <Col span={20}>{state.details ? formatAssetValue(state.details.frozen, 'ETP') : 0}ETP </Col>
-              </Row>
-              <Row>
-                <Col span={4}>总交易数</Col>
+                <Col span={4}>交易笔数</Col>
                 <Col span={20}>{state.txCount} </Col>
               </Row>
               <Row>

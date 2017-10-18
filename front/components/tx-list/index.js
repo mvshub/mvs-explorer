@@ -157,7 +157,12 @@ export default class TxList extends Component {
         </Row>  
         <Row gutter={8}>
           <Col span={10}>
-            {item.inputs.map((inItem, index) => this.renderInput(inItem, index, item))}
+            {item.inputs.map((inItem, index) => {
+              if (index > 3) {
+                return null;
+              }
+              return this.renderInput(inItem, index, item);
+            })}
           </Col>
           <Col span={4} className="from-to-icon"><Icon type="arrow-right" /></Col>
           <Col span={10}>
