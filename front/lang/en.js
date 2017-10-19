@@ -5,7 +5,8 @@ export default {
     bbs: 'BBS',
     wallet: 'Wallet',
     pool: 'Pool',
-    exchange: 'Exchange'
+    exchange: 'Exchange',
+    donate: 'Donate'
   },
   Header: {
     language: '语言',

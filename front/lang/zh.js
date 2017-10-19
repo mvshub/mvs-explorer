@@ -5,7 +5,8 @@ export default {
     bbs: '元界社区',
     wallet: '钱包',
     pool: '矿池',
-    exchange: '交易'
+    exchange: '交易',
+    donate: '捐助'
   },
   Header: {
     language: 'Language',
