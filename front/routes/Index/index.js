@@ -6,14 +6,15 @@ import * as Api from '@/service';
 import { moment, formatTime } from '@/utils';
 import createG2 from 'g2-react';
 import { Stat } from 'g2';
+import Lang from '@/lang';
 
 const Line = createG2(chart => {
   chart.line().position('date*tx_count');
   chart.col('date', {
-    alias: '日期',
+    alias: Lang.Index.Date,
     nice: false,
   }).col('tx_count', {
-    alias: '交易笔数'
+    alias: Lang.Index.count
   });
   chart.render();
 });
@@ -67,20 +68,20 @@ export default class Index extends Component {
   }
   getColumns() {
     return [{
-      title: '区块号',
+      title: Lang.Index.blockNuber,
       dataIndex: 'number',
       key: 'number',
       render: (data) => <Link to={`/block/${data}`}>{data}</Link>
     }, {
-      title: '交易笔数',
+      title: Lang.Index.transactionCount,
       dataIndex: 'transaction_count',
       key: 'transaction_count'
     }, {
-      title: '难度',
+      title: Lang.Index.bits,
       dataIndex: 'bits',
       key: 'bits',
     }, {
-      title: '出块时间',
+      title: Lang.Index.blockTime,
       dataIndex: 'time_stamp',
       key: 'time_stamp',
       render: (data) => formatTime(data),
@@ -93,23 +94,23 @@ export default class Index extends Component {
     return (<div>
       {current ? <div className="currentOverview">
         <div className="item">
-          <h5>当前难度</h5>
+          <h5>{Lang.Index.latest}</h5>
           <p>{current.difficult || '~'} T</p>
         </div>
         <div className="item">
-          <h5>当前算力</h5>
+          <h5>{Lang.Index.hashrate}</h5>
           <p>{current.rate || '~'} GH</p>
         </div>
         <div className="item">
-          <h5>ETP价格</h5>
+          <h5>{Lang.Index.price}</h5>
           <p>
-            <span>¥ {current.price || '~'}</span>
-            <span className="cap">(总市值：¥{current.cap})</span>
+            <span>$ {current.price || '~'}</span>
+            <span className="cap">({Lang.Index.cap}：${current.cap})</span>
           </p>
         </div>
       </div> : null}
       <div className="latest-top">
-        <h3>最新区块</h3>
+        <h3>{Lang.Index.latest}</h3>
         {
           state.loading ?
             <div style={{ textAlign: 'center' }}><Spin /></div>
@@ -118,7 +119,7 @@ export default class Index extends Component {
         }
       </div>
       <div className="last100">
-        <h3>最近100天交易次数</h3>
+        <h3>{Lang.Index.latesttx}</h3>
         {state.chartData ? <Line
           data={state.chartData}
           forceFit

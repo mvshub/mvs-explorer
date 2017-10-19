@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { Link } from 'dva/router';
 import { Row, Col, Icon, Tag } from 'antd';
 import { formatAssetValue, formatTime, parseLockHeight } from '@/utils';
+import Lang from '@/lang';
 
 import './style.less';
 
 const TxType = [
-  <Tag color="#fadb0a">挖矿奖励</Tag>,
-  <Tag color="#00a854">收入</Tag>,
-  <Tag color="#fa4141">支出</Tag>,
-  <Tag color="#1aa4fc">存款</Tag>,
-  <Tag color="#1aa4fc">存款-存入</Tag>,
-  <Tag color="#1aa4fc">存款-支出</Tag>,
-  <Tag color="#1aa4fc">存款-利息</Tag>
+  <Tag color="#fadb0a">{Lang.TX.minningReward}</Tag>,
+  <Tag color="#00a854">{Lang.TX.received}</Tag>,
+  <Tag color="#fa4141">{Lang.TX.send}</Tag>,
+  <Tag color="#1aa4fc">{Lang.TX.deposit}</Tag>,
+  <Tag color="#1aa4fc">{Lang.TX.depositIn}</Tag>,
+  <Tag color="#1aa4fc">{Lang.TX.depositOut}</Tag>,
+  <Tag color="#1aa4fc">{Lang.TX.depositInterest}</Tag>
 ];
 
 function getTxType(tx, address) {
@@ -61,8 +62,8 @@ export default class TxList extends Component {
     const { showScript } = this.props;
     if (!data.address) {
       return <div key={index} className="input-row">
-        <p>奖励</p>
-        {showScript ? <p className="script-info">输入脚本:{data.script}</p> : null}
+        <p>{Lang.TX.reward}</p>
+        {showScript ? <p className="script-info">{Lang.TX.inputScript}:{data.script}</p> : null}
       </div>;
     } else {
       return <div key={index} className="input-row">
@@ -70,7 +71,7 @@ export default class TxList extends Component {
           <Link to={`/address/${data.address}`}>{data.address}</Link>
           {/*<span style={{paddingLeft: '10px'}}>{formatAssetValue(data.tx_value)}</span>*/}
         </p>
-        {showScript ? <p className="script-info">输入脚本:{data.script}</p> : null}
+        {showScript ? <p className="script-info">{Lang.TX.inputScript}:{data.script}</p> : null}
       </div>
     }
   }
@@ -81,9 +82,9 @@ export default class TxList extends Component {
       <p>
         <Link to={`/address/${data.address}`}>{data.address}</Link>
         <span style={{paddingLeft: '10px'}}>{formatAssetValue(data.output_value, data.asset_name)}{data.asset_name}</span>
-        {isInput ? <Tag color="green" className="change-back">找零</Tag> : null}
+        {isInput ? <Tag color="green" className="change-back">{Lang.TX.change}</Tag> : null}
       </p>
-      {showScript ? <p className="script-info">输出脚本:{data.script}</p> : null}
+      {showScript ? <p className="script-info">{Lang.TX.outputScript}:{data.script}</p> : null}
     </div>
   }
   renderCount(data) {
@@ -113,14 +114,14 @@ export default class TxList extends Component {
         outETP += item.output_value;
       }
     });
-    let label = '转账';
+    let label = Lang.TX.transfer;
     let appendDes = '';
     if (address) {
       const txType = getTxType(data, address);
       label = TxType[txType];
       if (txType == 6 || txType == 4) {
         const lockHeight = parseLockHeight(outputs[0].script);
-        appendDes = `(解锁高度:${lockHeight})`;
+        appendDes = `(${Lang.TX.lockHeight}:${lockHeight})`;
       }
     }
     return <div className="output-count">
@@ -151,13 +152,18 @@ export default class TxList extends Component {
         <Row className="tx-hash">
           {props.noIndex ? null : <span>#{index+1}</span>}
           <Link to={`/tx/${item.hash}`}>{item.hash}</Link>
-          <span>区块:</span>
+          <span>{Lang.TX.block}:</span>
           <Link to={`/block/${item.block_height}`}>{item.block_height}</Link>
           {item.time_stamp ? <span>{formatTime(item.time_stamp)}</span> : null}
         </Row>  
         <Row gutter={8}>
           <Col span={10}>
-            {item.inputs.map((inItem, index) => this.renderInput(inItem, index, item))}
+            {item.inputs.map((inItem, index) => {
+              if (index > 3) {
+                return null;
+              }
+              return this.renderInput(inItem, index, item);
+            })}
           </Col>
           <Col span={4} className="from-to-icon"><Icon type="arrow-right" /></Col>
           <Col span={10}>

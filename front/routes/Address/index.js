@@ -6,6 +6,7 @@ import * as Api from '@/service';
 import { moment, formatTime, formatAssetValue } from '@/utils';
 import TxLoader from './txloader';
 import TxList from '~/tx-list';
+import Lang from '@/lang';
 
 import './style.less';
 
@@ -77,7 +78,7 @@ export default class Address extends Component {
   renderPageList() {
     const { data, page, details } = this.state;
     if (!details.transactions) {
-      return <p>暂无交易</p>;
+      return <p>{Lang.Address.noData}</p>;
     }
     return data.map(item => <TxLoader txId={item.hash} key={item.hash} />);
   }
@@ -90,27 +91,29 @@ export default class Address extends Component {
           <Col span={12}>
             <div className="overview">
               <Row>
-                <Col span={4}>地址</Col>
+                <Col span={4}>{Lang.Address.address}</Col>
                 <Col span={20}>{state.addressId} </Col>
               </Row>
               <Row>
-                <Col span={4}>可用余额</Col>
-                <Col span={20}>{state.details ? formatAssetValue(state.details.unspent, 'ETP') : 0}ETP </Col>
+                <Col span={4}>{Lang.Address.balance}</Col>
+                <Col span={20} className="balance">
+                  <div>{state.details ? formatAssetValue(state.details.unspent, 'ETP') : 0}</div>
+                  <div className="extra">
+                    <p>{Lang.Address.available}: {state.details ? formatAssetValue(state.details.unspent - state.details.frozen, 'ETP') : 0}</p>
+                    <p>{Lang.Address.frozen}: {state.details ? formatAssetValue(state.details.frozen, 'ETP') : 0}</p>
+                  </div>
+                </Col>
               </Row>
               <Row>
-                <Col span={4}>总计接收</Col>
+                <Col span={4}>{Lang.Address.received}</Col>
                 <Col span={20}>{state.details ? formatAssetValue(state.details.received, 'ETP') : 0}ETP </Col>
               </Row>
               <Row>
-                <Col span={4}>冻结</Col>
-                <Col span={20}>{state.details ? formatAssetValue(state.details.frozen, 'ETP') : 0}ETP </Col>
-              </Row>
-              <Row>
-                <Col span={4}>总交易数</Col>
+                <Col span={4}>{Lang.Address.txCount}</Col>
                 <Col span={20}>{state.txCount} </Col>
               </Row>
               <Row>
-                <Col span={4}>资产</Col>
+                <Col span={4}>{Lang.Address.assets}</Col>
                 <Col span={20}>
                   <div className="assests">
                     {state.assests.map(item => <p>
@@ -129,7 +132,7 @@ export default class Address extends Component {
           </Col>
         </Row>
         
-        <h4 style={{marginTop: '10px'}}>交易记录</h4>
+        <h4 style={{marginTop: '10px'}}>{Lang.Address.history}</h4>
         {state.loading ? <div style={{ textAlign: 'center' }}><Spin /></div> : null}
         {!state.loading && state.data ? <div>
           <TxList data={state.data} noIndex address={state.addressId} />

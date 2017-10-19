@@ -6,6 +6,7 @@ import * as Api from '@/service';
 import { moment, formatTime, formatAssetValue } from '@/utils';
 import createG2 from 'g2-react';
 import { Stat } from 'g2';
+import Lang from '@/lang';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
@@ -19,10 +20,10 @@ const plotCfg = {
 const TxCountLine = createG2(chart => {
   chart.line().position('date*tx_count');
   chart.col('date', {
-    alias: '日期',
+    alias: Lang.Charts.date,
     nice: false,
   }).col('tx_count', {
-    alias: '交易笔数'
+    alias: Lang.Charts.txCount
   });
   chart.render();
 });
@@ -30,10 +31,10 @@ const TxCountLine = createG2(chart => {
 const TxVolumeLine = createG2(chart => {
   chart.line().position('date*volume');
   chart.col('date', {
-    alias: '日期',
+    alias: Lang.Charts.date,
     nice: false,
   }).col('volume', {
-    alias: '转账金额',
+    alias: Lang.Charts.volume,
     nice: false,
     tickInterval: 10000
   });
@@ -50,10 +51,10 @@ const TxVolumeLine = createG2(chart => {
 const BlockCountLine = createG2(chart => {
   chart.line().position('date*block_count');
   chart.col('date', {
-    alias: '日期',
+    alias: Lang.Charts.date,
     nice: false,
   }).col('block_count', {
-    alias: '块数量'
+    alias: Lang.Charts.blockCount
   });
   chart.render();
 });
@@ -61,10 +62,10 @@ const BlockCountLine = createG2(chart => {
 const AvgDifficultyLine = createG2(chart => {
   chart.line().position('date*avg_difficulty');
   chart.col('date', {
-    alias: '日期',
+    alias: Lang.Charts.date,
     nice: false,
   }).col('avg_difficulty', {
-    alias: '难度',
+    alias: Lang.Charts.difficulty,
     nice: false,
     tickInterval: 1000000000000
   });
@@ -115,13 +116,13 @@ export default class Charts extends Component {
       <div className="charts-page">
         <div className="charts-tab">
           <RadioGroup defaultValue="100" size="large" value={state.day} onChange={this.tabChange}>
-            <RadioButton value="100">100天</RadioButton>
-            <RadioButton value="60">60天</RadioButton>
-            <RadioButton value="30">30天</RadioButton>
-            <RadioButton value="7">7天</RadioButton>
+            <RadioButton value="100">100{Lang.Charts.day}</RadioButton>
+            <RadioButton value="60">60{Lang.Charts.day}</RadioButton>
+            <RadioButton value="30">30{Lang.Charts.day}</RadioButton>
+            <RadioButton value="7">7{Lang.Charts.day}</RadioButton>
           </RadioGroup>
         </div>
-        <h3>交易笔数</h3>
+        <h3>{Lang.Charts.txCount}</h3>
         <TxCountLine
           data={state.chartData}
           forceFit
@@ -129,7 +130,7 @@ export default class Charts extends Component {
           plotCfg={plotCfg}
         />
 
-        <h3>转账金额(ETP)</h3>
+        <h3>{Lang.Charts.volume}(ETP)</h3>
         <TxVolumeLine
           data={state.chartData}
           height={300}
@@ -137,7 +138,7 @@ export default class Charts extends Component {
           plotCfg={plotCfg}
         />
 
-        <h3>平均难度</h3>
+        <h3>{Lang.Charts.avgDifficulty}</h3>
         <AvgDifficultyLine
           data={state.chartData}
           height={300}
@@ -145,7 +146,7 @@ export default class Charts extends Component {
           plotCfg={plotCfg}
         />
 
-        <h3>每天块数</h3>
+        <h3>{Lang.Charts.blockOneDay}</h3>
         <BlockCountLine
           data={state.chartData}
           height={300}

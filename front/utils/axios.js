@@ -1,18 +1,20 @@
 import axios from 'axios';
 import { message } from 'antd';
 
-// axios.defaults.baseURL = '';
-// axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest';
-// axios.interceptors.request.use(config => ({
-//   ...config,
-//   // withCredentials: true
-// }));
+let lang = 'en';
+if (navigator.language == 'zh-CN') {
+  lang = 'zh';
+}
+const local = localStorage.getItem('lang');
+if (local && local == 'zh') {
+  lang = zh;
+} else if (local == 'zh') {
+  lang = en;
+}
+
+axios.defaults.headers['lang'] = lang;
 
 axios.interceptors.response.use((res) => {
-//   if (typeof res.data != 'object') {
-//     console.error(res.data);
-//     return { errcode: 'response error' };
-//   }
   return res.data;
 }, (err) => {
   console.error(err);

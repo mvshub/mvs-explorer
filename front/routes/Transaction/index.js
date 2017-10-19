@@ -4,6 +4,7 @@ import { Link } from 'dva/router';
 import { Spin, Table, Row, Col, Icon  } from 'antd';
 import TxList from '~/tx-list';
 import * as Api from '@/service';
+import Lang from '@/lang';
 
 import './style.less';
 
@@ -41,7 +42,7 @@ export default class Transaction extends Component {
     const props = this.props;
     return (
       <div className="tx-detail">
-        <h3>交易记录</h3>
+        <h3>{Lang.Transaction.transaction}</h3>
         {
           state.loading ?
             <div style={{ textAlign: 'center' }}><Spin /></div>
