@@ -1,4 +1,6 @@
 module.exports = {
+  pageTitle: 'etp,metaverse,explorer,transactions,free etp,',
+  description: 'etp,metaverse,explorer,transactions',
   noBlockFound: 'No block found',
   noTx: 'No TX found',
   noTxHistory: 'No TX history with this address.',

@@ -1,4 +1,6 @@
 module.exports = {
+  pageTitle: 'etp,熵,元界,区块浏览,区块查询,交易查询',
+  description: '元界区块浏览器,区块查询,交易查询,熵',
   noBlockFound: '没有找到区块',
   noTx: '未查询到交易',
   noTxHistory: '未查询到该地址的交易记录',

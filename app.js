@@ -15,9 +15,14 @@ db(app);
 
 // 映射语言
 app.use(async (ctx, next) => {
-  const lang = ctx.headers.lang || 'en';
+  let lang = 'en';
+  console.log(ctx.headers);
+  if (ctx.headers.lang) {
+    lang = ctx.headers.lang;
+  } else if (ctx.headers['accept-language'] && ctx.headers['accept-language'].indexOf('zh') > -1) {
+    lang = 'zh';
+  }
   ctx.lang = Lang[lang];
-  console.log('lng:::', ctx.lang)
   await next();
 });
 
@@ -58,7 +63,8 @@ app.use((ctx, next) => {
     return next();
   }
   ctx.render('index', {
-      title: 'MyMVS',
+      pageTitle: ctx.lang.pageTitle,
+      description: ctx.lang.description,
       config
   });
   return next();

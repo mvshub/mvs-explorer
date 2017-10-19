@@ -7,9 +7,9 @@ if (navigator.language == 'zh-CN') {
 }
 const local = localStorage.getItem('lang');
 if (local && local == 'zh') {
-  lang = zh;
+  lang = 'zh';
 } else if (local == 'en') {
-  lang = en;
+  lang = 'en';
 }
 
 axios.defaults.headers['lang'] = lang;
