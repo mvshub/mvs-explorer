@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
 import { Link } from 'dva/router';
-import { Input, message } from 'antd';
-const Search = Input.Search;
+import { Input, message, Menu, Dropdown, Icon } from 'antd';
+import Lang from '@/lang';
 
 import './style.less';
+
+const Search = Input.Search;
+const menu = (
+  <Menu onSelect={item =>{ localStorage.setItem('lang', item.key); location.reload(); }}>
+    <Menu.Item key="zh">中文</Menu.Item>
+    <Menu.Item key="en">English</Menu.Item>
+  </Menu>
+);
+
 
 export default class Header extends Component {
   constructor(props) {
@@ -46,16 +55,24 @@ export default class Header extends Component {
               <img src="http://s.weituibao.com//static/1499390458758/logo-black.png" alt=""/>
             </Link>
           </span>
-          <div>元界区块浏览</div>
+          <div>{Lang.Header.name}</div>
         </div>
-        <div className="search">
-          <Search placeholder="地址/哈希/区块" onSearch={this.search} />
+        <div className="navs">
+          <div className="menus">
+            <Link to="/charts">{Lang.Header.charts}</Link>
+            <Link to="/assets">{Lang.Header.assets}</Link>
+            <Link to="/free">{Lang.Header.free}</Link>
+            <Dropdown overlay={menu}>
+              <a className="ant-dropdown-link" href="#">
+                {Lang.Header.language}<Icon type="down" />
+              </a>
+            </Dropdown>
+          </div>
+          <div className="search">
+            <Search placeholder={Lang.Header.search} onSearch={this.search} />
+          </div>
         </div>
-        <div className="menus">
-          <Link to="/charts">图表</Link>
-          <Link to="/assets">资产列表</Link>
-          <Link to="/free">免费领币</Link>
-        </div>
+        
       </header>
     );
   }

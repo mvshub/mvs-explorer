@@ -40,14 +40,14 @@ module.exports = {
         let cap = '~';
         let volume = '~';
         try {
-            const priceRes = await request.get('https://api.coinmarketcap.com/v1/ticker/metaverse/?convert=CNY', {
+            const priceRes = await request.get('https://api.coinmarketcap.com/v1/ticker/metaverse', {
                 json: true,
                 timeout: 1000 * 10
             });
             if (priceRes && priceRes[0]) {
-                price = priceRes[0].price_cny;
-                cap = priceRes[0].market_cap_cny;
-                volume = priceRes[0]['24h_volume_cny'];
+                price = priceRes[0].price_usd;
+                cap = priceRes[0].market_cap_usd;
+                volume = priceRes[0]['24h_volume_usd'];
             }
         } catch(e) {
             // console.log(e);
