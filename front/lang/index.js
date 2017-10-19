@@ -8,7 +8,7 @@ if (navigator.language == 'zh-CN') {
 const local = localStorage.getItem('lang');
 if (local && local == 'zh') {
   lang = zh;
-} else {
+} else if (local == 'zh') {
   lang = en;
 }
 
