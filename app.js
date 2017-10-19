@@ -6,11 +6,20 @@ const Mvs = require('mvs-rpc');
 const db = require('./server/models');
 const koaBody = require('koa-body');
 const config = require('./server/config');
+const Lang = require('./server/lang');
 
 const app = new Koa();
 
 // 加载数据库
 db(app);
+
+// 映射语言
+app.use(async (ctx, next) => {
+  const lang = ctx.headers.lang || 'en';
+  ctx.lang = Lang[lang];
+  console.log('lng:::', ctx.lang)
+  await next();
+});
 
 app.use(async (ctx, next) => {
   try {
@@ -20,8 +29,9 @@ app.use(async (ctx, next) => {
     ctx.body = err.message;
     if (ctx.url.indexOf('/api/') == 0) {
       ctx.status = 200;
+      console.log(ctx.lang);
       ctx.body = {
-        msg: '服务器异常'
+        msg: ctx.lang.serverError
       };
     }
     ctx.app.emit('error', err, ctx);

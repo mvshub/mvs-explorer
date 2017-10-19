@@ -13,7 +13,7 @@ export default {
     name: 'Metaverse Explorer',
     charts: 'Charts',
     assets: 'Assets',
-    free: 'Free Fee',
+    free: 'Free ETP',
     search: 'address/hash/block'
   },
   Index: {

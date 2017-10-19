@@ -67,7 +67,7 @@ module.exports = {
         const details = await ctx.app.mvs.heightHeader(id);
         if (!details) {
             ctx.body = {
-                msg: '没有找到区块'
+                msg: ctx.lang.noBlockFound
             }
         } else  {
             const block = await ctx.app.mvs.block(details.hash);
@@ -91,7 +91,7 @@ module.exports = {
 
         if (!tx) {
             ctx.body = {
-                msg: '未查询到交易'
+                msg: ctx.lang.noTx
             };
         } else {
             console.log(tx);
@@ -153,7 +153,7 @@ module.exports = {
 
         if (!res) {
             ctx.body = {
-                msg: '未查询到该地址的交易记录'
+                msg: ctx.lang.noTxHistory
             }; 
             return next();
         }
@@ -227,7 +227,7 @@ module.exports = {
         // 至少隔10s才能发放一笔
         if (lastFreeTime && Date.now() - lastFreeTime < 10000) {
             ctx.body = {
-                msg: '刚有个哥们领取了一次，客官请稍等一会再领吧.'
+                msg: ctx.lang.hasSendRecently
             };
             return next();
         }
@@ -236,7 +236,7 @@ module.exports = {
         const balance = await ctx.app.mvs.balance(body.address);
         if (balance.unspent > 10000) {
             ctx.body = {
-                msg: '兄台，你地址中还有余额，不用领取.'
+                msg: ctx.lang.haveBalance
             };
             return next();
         }
