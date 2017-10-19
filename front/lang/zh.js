@@ -39,5 +39,64 @@ export default {
     txCount: '交易笔数',
     assets: '资产',
     history: '交易记录'
+  },
+  Assets: {
+    symbol: '符号',
+    name: '名称',
+    supply: '最大发行量',
+    site: '官网',
+    description: '描述',
+    assets: '元界资产列表'
+  },
+  Block: {
+    hash: '哈希',
+    blockTime: '出块时间',
+    nonce: '随机数',
+    version: '版本',
+    txCount: '交易笔数',
+    bits: '难度',
+    merkleHash: '默克尔树哈希',
+    previousHash: '前一区块哈希',
+    block: '区块',
+    tx: '交易'
+  },
+  Charts: {
+    date: '日期',
+    txCount: '交易笔数',
+    blockCount: '块数',
+    volume: '转账金额',
+    difficulty: '难度',
+    day: '天',
+    avgDifficulty: '平均难度',
+    blockOneDay: '每天块数'
+  },
+  Transaction: {
+    transaction: '交易记录'
+  },
+  Free: {
+    noAddressTips: '请填写ETP接收地址！',
+    sendSuccessTips: '发送成功，请查收!',
+    title: '免费领币',
+    notice1: '告示：为给新手使用元界管理资产时避免没有ETP作为转账手续费的尴尬，本站提供免费领取微额ETP，方便你使用元界转账资产。',
+    notice2: '每分钟内最多发放10笔，足够给新手们当手续费，请不要做无意义的领取。',
+    apply: '领取',
+    balance: '免费金余额',
+    received: '领取了'
+  },
+  TX: {
+    minningReward: '挖矿奖励',
+    received: '收入',
+    send: '支出',
+    deposit: '存款',
+    depositIn: '存款-存入',
+    depositOut: '存款-支出',
+    depositInterest: '存款-利息',
+    reward: '奖励',
+    inputScript: '输入脚本',
+    outputScript: '输出脚本',
+    change: '找零',
+    transfer: '转账',
+    lockHeight: '解锁高度',
+    block: '区块'
   }
 };

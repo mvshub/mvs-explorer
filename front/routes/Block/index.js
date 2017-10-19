@@ -5,37 +5,38 @@ import { Spin, Table, Row, Col, Icon  } from 'antd';
 import TxList from '~/tx-list';
 import * as Api from '@/service';
 import { moment, formatTime, formatAssetValue } from '@/utils';
+import Lang from '@/lang';
 
 import './style.less';
 
 const KeyMap = [{
   key: 'hash',
-  name: '哈希'
+  name: Lang.Block.hash
 }, {
   key: 'time_stamp',
-  name: '出块时间',
+  name: Lang.Block.blockTime,
   render: (val) => formatTime(val)
 }, {
   key: 'transaction_count',
-  name: '交易笔数'
+  name: Lang.Block.txCount
 }, {
   key: 'nonce',
-  name: '随机数'
+  name: Lang.Block.nonce
 }, {
   key: 'mixhash',
   name: 'Mix Hash'
 }, {
   key: 'version',
-  name: '版本'
+  name: Lang.Block.version
 }, {
   key: 'bits',
-  name: '难度'
+  name: Lang.Block.bits
 }, {
   key: 'merkle_tree_hash',
-  name: '默克尔树哈希'
+  name: Lang.Block.merkleHash
 }, {
   key: 'previous_block_hash',
-  name: '前一区块哈希'
+  name: Lang.Block.previousHash
 }]
 
 export default class Block extends Component {
@@ -72,7 +73,7 @@ export default class Block extends Component {
     const props = this.props;
     return (
       <div className="block-detail">
-        <h3>区块: {state.blockId}</h3>
+        <h3>{Lang.Block.block}: {state.blockId}</h3>
         {
           state.loading ?
             <div style={{ textAlign: 'center' }}><Spin /></div>
@@ -91,7 +92,7 @@ export default class Block extends Component {
                     <Col span={20}>{val}</Col>
                   </Row>;
                 })}
-                <h4 style={{marginTop: '10px'}}>交易</h4>
+                <h4 style={{marginTop: '10px'}}>{Lang.Block.tx}</h4>
                 <TxList data={state.data.txs} />
               </div> : state.msg}
             </div>

@@ -4,6 +4,7 @@ import { Link } from 'dva/router';
 import { Spin, Table } from 'antd';
 import * as Api from '@/service';
 import { moment, formatTime } from '@/utils';
+import Lang from '@/lang';
 
 import './style.less';
 
@@ -21,15 +22,15 @@ export default class Assets extends Component {
   }
   getColumns() {
     return [{
-      title: '资产符号',
+      title: Lang.Assets.symbol,
       dataIndex: 'symbol',
       key: 'symbol'
     }, {
-      title: '名称',
+      title: Lang.Assets.name,
       dataIndex: 'name',
       key: 'name'
     }, {
-      title: '发行量',
+      title: Lang.Assets.supply,
       dataIndex: 'maximum_supply',
       key: 'maximum_supply',
       render: (val, record) => {
@@ -39,12 +40,12 @@ export default class Assets extends Component {
         return val;
       }
     }, {
-      title: '官网',
+      title: Lang.Assets.site,
       dataIndex: 'site',
       key: 'site',
       render: (val) => <a href={val} target="_blank">{val}</a>
     }, {
-      title: '描述',
+      title: Lang.Assets.description,
       dataIndex: 'description',
       key: 'description'
     }];
@@ -53,7 +54,7 @@ export default class Assets extends Component {
     const state = this.state;
     return (
       <div className="assets-page">
-        <h3>元界资产列表</h3>
+        <h3>{Lang.Assets.assets}</h3>
         <Table dataSource={state.list} columns={this.getColumns()} pagination={false} />
       </div>
     );

@@ -4,6 +4,7 @@ import { Link } from 'dva/router';
 import { Spin, Alert, Input, Select, Button, message } from 'antd';
 import * as Api from '@/service';
 import { moment, formatAssetValue } from '@/utils';
+import Lang from '@/lang';
 
 import './style.less';
 
@@ -38,7 +39,7 @@ export default class Free extends Component {
   send() {
     const { address, value } = this.state;
     if (!address) {
-      message.error('请填写ETP接收地址！');
+      message.error(ListeningStateChangedEvent.Free.noAddressTips);
       return;
     }
     Api.freeSend({
@@ -48,7 +49,7 @@ export default class Free extends Component {
       if (res.msg) {
         message.error(res.msg);
       } else {
-        message.success('发送成功，请查收!');
+        message.success(Lang.Free.sendSuccessTips);
         this.setState({
           address: ''
         });
@@ -69,11 +70,11 @@ export default class Free extends Component {
     const { freeHistory, value, address } = this.state;
     return (
       <div className="free-page">
-        <h3>免费领币</h3>
+        <h3>{Lang.Free.title}</h3>
         <Alert
           message={<div>
-            <p>告示：为给新手使用元界管理资产时避免没有ETP作为转账手续费的尴尬，本站提供免费领取微额ETP，方便你使用元界转账资产。</p>
-            <p>每分钟内最多发放10笔，足够给新手们当手续费，请不要做无意义的领取。</p>
+            <p>{Lang.Free.notice1}</p>
+            <p>{Lang.Free.notice2}</p>
           </div>}
           type="warning"
           showIcon
@@ -85,17 +86,17 @@ export default class Free extends Component {
               <Option value="2">0.0003</Option>
             </Select>
             <Input style={{ width: '50%' }} onChange={this.handleChange} placeholder="ETP接收地址" value={address} />
-            <Button type="primary" size="large" className="btn" onClick={this.send}>领取</Button>
+            <Button type="primary" size="large" className="btn" onClick={this.send}>{Lang.Free.apply}</Button>
           </InputGroup>
         </div>
         
         {freeHistory ? <div>
-          <div className="free-balance">免费金余额: {formatAssetValue(freeHistory.balance, 'etp')}ETP</div>
+          <div className="free-balance">{Lang.Free.balance}: {formatAssetValue(freeHistory.balance, 'etp')}ETP</div>
           <div className="free-history">
             {freeHistory.history.map(item => <p>
                 <span className="time">{moment(new Date(item.time)).format('YYYY-MM-DD HH:mm:ss')}</span>
                 <span className="address">{item.address}</span>
-                <span className="info">领取了{formatAssetValue(item.value, 'etp')}</span>
+                <span className="info">{Lang.Free.received}{formatAssetValue(item.value, 'etp')}</span>
               </p>)}
           </div>
         </div> : null}
