@@ -59,6 +59,7 @@ export default class Header extends Component {
         </div>
         <div className="navs">
           <div className="menus">
+            <Link to="/">{Lang.Header.home}</Link>
             <Link to="/charts">{Lang.Header.charts}</Link>
             <Link to="/assets">{Lang.Header.assets}</Link>
             <Link to="/free">{Lang.Header.free}</Link>

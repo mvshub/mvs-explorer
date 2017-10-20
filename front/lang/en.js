@@ -9,6 +9,7 @@ export default {
     donate: 'Donate'
   },
   Header: {
+    home: 'Home',
     language: '语言',
     name: 'Metaverse Explorer',
     charts: 'Charts',

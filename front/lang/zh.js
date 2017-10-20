@@ -9,6 +9,7 @@ export default {
     donate: '捐助'
   },
   Header: {
+    home: '首页',
     language: 'Language',
     name: '元界区块浏览',
     charts: '图表',

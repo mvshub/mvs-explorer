@@ -94,7 +94,7 @@ export default class Index extends Component {
     return (<div>
       {current ? <div className="currentOverview">
         <div className="item">
-          <h5>{Lang.Index.latest}</h5>
+          <h5>{Lang.Index.difficulty}</h5>
           <p>{current.difficult || '~'} T</p>
         </div>
         <div className="item">
