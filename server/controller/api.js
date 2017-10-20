@@ -54,7 +54,7 @@ module.exports = {
         }
         ctx.body = {
             difficult: lastHead.bits,
-            rate: lastHead.bits / 14.4,
+            rate: lastHead.bits / 32,
             price,
             cap,
             volume
