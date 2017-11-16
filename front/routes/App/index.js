@@ -20,10 +20,8 @@ export default class App extends Component {
       <div className="">
         <Header className="header" history={history} />
         <div className="container">{children ? children : <Index />}</div>
-        <footer className="copy-right text-center">
-          
-        </footer>
-        <div className="footer-links">
+        <footer className="text-center">
+          <div className="footer-links">
             <div className="link-group">
               <h3>{Lang.App.officialSite}</h3>
               <div>
@@ -64,6 +62,7 @@ export default class App extends Component {
               </div>
             </div>
           </div>
+        </footer>  
       </div>
     );
   }
