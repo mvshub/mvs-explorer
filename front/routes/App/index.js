@@ -51,6 +51,7 @@ export default class App extends Component {
                 <a href="https://etp.fairpool.xyz" target="_blank">fairpool</a>
                 <a href="http://etp.mole-pool.net:85" target="_blank">etp.mole-pool</a>
                 <a href="http://etp.sandpool.org/" target="_blank">sandpool</a>
+                <a href="https://2miners.com/" target="_blank">2miners.com</a>
               </div>
             </div>
             <div className="link-group">
