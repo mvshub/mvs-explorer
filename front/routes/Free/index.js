@@ -28,12 +28,17 @@ export default class Free extends Component {
     this.setValue = this.setValue.bind(this);
     this.loadHistory = this.loadHistory.bind(this);
   }
+  componentWillUnmount() {
+    if (this.timmer != undefined) {
+      clearTimeout(this.timmer);
+    }
+  }
   loadHistory() {
     Api.getFreeHistory().then(res => {
       this.setState({
         freeHistory: res.data
       });
-      setTimeout(this.loadHistory, 9 * 1000);
+      this.timmer = setTimeout(this.loadHistory, 9 * 1000);
     });
   }
   send() {
