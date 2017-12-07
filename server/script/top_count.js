@@ -4,43 +4,88 @@ const utils = require('../utils');
 const fs = require('fs');
 const path = require('path');
 const request = require('request-promise-native');
-
+const sqlite3 = require('sqlite3').verbose();
 const stepLog = require('./top_step.json');
 const config = require('../config');
 
 const mvs = new Mvs(config.rpcServer);
+const db = new sqlite3.Database('../data/mymvs.db');
 
-let result = stepLog;
-let minAddress = null;
-let minValue = 0;
+const findAddress = (address) => {
+  return new Promise((res, rej) => {
+    db.each('select * from address_value where address=? limit 1', address, (err, row) => {
+      if (err) {
+        rej(err);
+        return;
+      }
+      res(row);
+    });
+  });
+}
+
+const addRow = (address, unspend, time) => {
+  const stmt = db.prepare('INSERT INTO address_value VALUES(?, ?, ?)');
+  stmt.run([address, unspend, time]);
+  stmt.finalize();
+}
+
+const updateRow = (address, unspend, time) => {
+  const stmt = db.prepare('INSERT INTO address_value VALUES(?, ?, ?)');
+  stmt.run([address, unspend, time]);
+  stmt.finalize();
+}
 
 const loopBlock = async (height) => {
     try{
       const header = await mvs.heightHeader(height);
       const block = await mvs.block(header.hash);
       const address = utils.listTxAddress(block.txs.transactions);
-      address.forEach(async (item) => {
-        if (!result[item]) {
-          const assest = await mvs.balance(item);
-          // console.log(assest);
-          if (parseInt(assest.unspent) > 0) {
-            result[item] = assest.unspent;
-            console.log('find one:', item, assest.unspent)
-          }
+      console.log('height::', height, address.length);
+      for(let i=0; i < address.length; i++) {
+        const item = address[i];
+        const assest = await mvs.balance(item);
+        const hasAddress = await findAddress(address);
+        if (hasAddress) {
+          updateRow(address, assest.unspend, Date.now());
+        } else {
+          addRow(address, assest.unspend, Date.now());
         }
-        console.log('all address::', Object.keys(result).length, height);
-      });
+      }
       loopBlock(height + 1);
     } catch(e) {
       console.log(e);
-      fs.writeFileSync(path.join(__dirname, './top_step.json'), JSON.stringify(result));
+      fs.writeFileSync(path.join(__dirname, './top_step.json'), JSON.stringify({
+        stop_height: height
+      }));
     }
 };
 
-module.exports = (start) => {
-    // result = {};
-    // max = {};
-    // min = {};
-    // loopBlock(stepLog.end_block + 1);
-    loopBlock(start);
+function start() {
+  let log = fs.readFileSync(path.join(__dirname, './top_step.json'));
+  log = JSON.parse(log);
+  db.serialize(() => {
+    loopBlock(log.stop_height);
+  });
 }
+
+// start();
+
+function initTable() {
+  db.serialize(function() {
+    db.run("CREATE TABLE address_value (address TEXT, unspent INTEGER, lastime INTEGER)");
+  });
+  db.close();
+}
+
+function test() {
+  db.serialize(function() {
+    findAddress('c').then((res) => {
+      console.log(res);
+    });  
+    // addRow('b', 200, 2);
+  });
+  db.close();
+}
+
+test();
+// initTable();
