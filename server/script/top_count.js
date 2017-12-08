@@ -37,45 +37,74 @@ const updateRow = (address, unspent, time) => {
   stmt.finalize();
 }
 
+let cacheAddress = {};
+let lastCacheHeight = 0;
+let lasCacheTime = 0;
 const loopBlock = async (height) => {
-    try{
-      const header = await mvs.heightHeader(height);
-      const block = await mvs.block(header.hash);
-      const address = utils.listTxAddress(block.txs.transactions);
-      console.log('>>>>>>>>>>>>height::', height, address.length);
-      for(let i=0; i < address.length; i++) {
-        const item = address[i];
+  // 更新到774045为止
+  if (height > 774045) {
+    return;
+  }
+  try{
+    const header = await mvs.heightHeader(height);
+    const block = await mvs.block(header.hash);
+    const address = utils.listTxAddress(block.txs.transactions);
+    console.log('>>>>>>>>>>>>height::', height, address.length);
+
+    //每1w高度记清空一次缓存区域
+    if (height - lastCacheHeight > 10000) {
+      lastCacheHeight = height;
+      cacheAddress = {};
+      console.log('**************************time:', (Date.now() - lasCacheTime) / 1000 / 60);
+      lasCacheTime = Date.now();
+
+    }
+
+    //
+    for(let i=0; i < address.length; i++) {
+      const item = address[i];
+      // 在缓存区里的地址直接跳过
+      if (cacheAddress[item]) {
+
+      } else {
         const assest = await mvs.balance(item);
         assest.unspent = parseInt(assest.unspent);
         if (assest.unspent > 0) {
-          // console.log(assest.address, '::::', assest.unspent); 
           const hasAddress = await findAddress(item);
-          console.log('hasAddress::', hasAddress);
-          if (hasAddress) {
-            updateRow(item, assest.unspent, Date.now());
-          } else {
+          if (!hasAddress) {
             addRow(item, assest.unspent, Date.now());
           }
+          // if (hasAddress) {
+          //   if (height > 774045) {
+          //     updateRow(item, assest.unspent, Date.now());
+          //   }
+          // } else {
+          //   addRow(item, assest.unspent, Date.now());
+          // }
         }
+        cacheAddress[item] = true;
       }
-      loopBlock(height + 1);
-      fs.writeFileSync(path.join(__dirname, './top_step.json'), JSON.stringify({
-        stop_height: height
-      }));
-    } catch(e) {
-      console.log(e);
     }
+    loopBlock(height + 1);
+    fs.writeFileSync(path.join(__dirname, './top_step.json'), JSON.stringify({
+      stop_height: height
+    }));
+  } catch(e) {
+    console.log(e);
+  }
 };
 
 function start() {
   let log = fs.readFileSync(path.join(__dirname, './top_step.json'));
   log = JSON.parse(log);
+  lastCacheHeight = log.stop_height;
+  lasCacheTime = Date.now();
   db.serialize(() => {
     loopBlock(log.stop_height);
   });
 }
 
-start();
+// start();
 
 function initTable() {
   db.serialize(function() {
@@ -86,7 +115,7 @@ function initTable() {
 
 function test() {
   db.serialize(function() {
-    db.each('select * from address_value', (err, row) => {
+    db.get('select count(*) from address_value', (err, row) => {
       console.log('row::', row);
     });
     // addRow('b', 1, 1);
@@ -94,5 +123,5 @@ function test() {
   db.close();
 }
 
-// test();
+test();
 // initTable();
