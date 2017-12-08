@@ -11,7 +11,7 @@ const mvs = new Mvs(config.rpcServer);
 mvs.listassets().then(res => {
   let obj = {};
   res.forEach(item => {
-    obj[item.symbol] = parseInt(item.decimal_number, 10);
+    obj[item.symbol.toLocaleLowerCase()] = parseInt(item.decimal_number, 10);
     return obj;
   });
   obj['etp'] = 8;
