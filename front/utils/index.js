@@ -36,7 +36,7 @@ const formatAssetValue = (num, type) => {
     type = type.toLocaleLowerCase();
   }
   if (assetConfig[type]) {
-    return (val/assetConfig[type] * 10).toFixed(assetConfig[type]);
+    return (num/assetConfig[type] * 10).toFixed(assetConfig[type]);
   }
   return num;
 }
