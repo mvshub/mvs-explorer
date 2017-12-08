@@ -51,7 +51,7 @@ const loopBlock = async (height) => {
     const address = utils.listTxAddress(block.txs.transactions);
     console.log('>>>>>>>>>>>>height::', height, address.length);
 
-    //每1w高度记清空一次缓存区域
+    //每1w高度记清空一次缓存区域,避免占用过大内存
     if (height - lastCacheHeight > 10000) {
       lastCacheHeight = height;
       cacheAddress = {};

@@ -34,7 +34,7 @@
     "koa-static": "^4.0.0",
     "later": "^1.2.0",
     "moment": "2.18.1",
-    "mvs-rpc": "1.0.1",
+    "mvs-rpc": "^1.0.1",
     "nedb": "^1.8.0",
     "qs": "6.4.0",
     "react": "15.4.2",
@@ -43,7 +43,8 @@
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4",
     "shelljs": "^0.7.8",
-    "sqlite3": "^3.1.13"
+    "sqlite3": "^3.1.13",
+    "yargs-parser": "^8.0.0"
   },
   "devDependencies": {
     "autoprefixer": "7.1.0",

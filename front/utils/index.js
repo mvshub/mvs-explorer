@@ -1,6 +1,7 @@
 import axios from './axios.js';
 import moment from './moment.js';
 import ba from 'binascii';
+import assetConfig from './asset-config';
 
 const initParams = (params) => {
   let args = {};
@@ -30,21 +31,12 @@ const formatTime = (num) => {
   return moment(time).format('YYYY-MM-DD HH:mm:ss');
 }
 
-const assetValueMap = {
-  'etp': (val) => (val/100000000).toFixed(8),
-  'mvs.zgc': (val) => (val/100000000).toFixed(8),
-  'cmc': (val) => (val/10000).toFixed(4),
-  'mvs.zdc': (val) => (val/10000).toFixed(8),
-  'tea': (val) => (val/10000).toFixed(4),
-  'mvs.cpc': (val) => (val/10000).toFixed(4),
-  'mvs.zac': (val) => (val/10000).toFixed(4)
-}
 const formatAssetValue = (num, type) => {
   if (type) {
     type = type.toLocaleLowerCase();
   }
-  if (assetValueMap[type]) {
-    return assetValueMap[type](num);
+  if (assetConfig[type]) {
+    return (val/assetConfig[type] * 10).toFixed(assetConfig[type]);
   }
   return num;
 }
