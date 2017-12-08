@@ -13,7 +13,7 @@ const db = new sqlite3.Database('../data/mymvs.db');
 
 const findAddress = (address) => {
   return new Promise((res, rej) => {
-    db.each(`select * from address_value where address=? limit 1`, address, (err, row) => {
+    db.get(`SELECT * from address_value where address=? limit 1 `, address, (err, row) => {
       if (err) {
         rej(err);
         return;
@@ -21,7 +21,7 @@ const findAddress = (address) => {
       res(row);
     });
   });
-}
+};
 
 const addRow = (address, unspent, time) => {
   console.log('add one.')
@@ -48,9 +48,9 @@ const loopBlock = async (height) => {
         const assest = await mvs.balance(item);
         assest.unspent = parseInt(assest.unspent);
         if (assest.unspent > 0) {
-          console.log(assest.address, '::::', assest.unspent); 
+          // console.log(assest.address, '::::', assest.unspent); 
           const hasAddress = await findAddress(item);
-          // console.log('hasAddress::', hasAddress);
+          console.log('hasAddress::', hasAddress);
           if (hasAddress) {
             updateRow(item, assest.unspent, Date.now());
           } else {
@@ -86,9 +86,10 @@ function initTable() {
 
 function test() {
   db.serialize(function() {
-    db.each('select * from address_value limit 1', (err, row) => {
-      console.log(row);
+    db.each('select * from address_value', (err, row) => {
+      console.log('row::', row);
     });
+    // addRow('b', 1, 1);
   });
   db.close();
 }
