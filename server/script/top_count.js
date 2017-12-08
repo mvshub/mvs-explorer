@@ -13,7 +13,7 @@ const db = new sqlite3.Database('../data/mymvs.db');
 
 const findAddress = (address) => {
   return new Promise((res, rej) => {
-    db.each('select * from address_value where address=? limit 1', address, (err, row) => {
+    db.each(`select * from address_value where address=? limit 1`, address, (err, row) => {
       if (err) {
         rej(err);
         return;
@@ -23,15 +23,17 @@ const findAddress = (address) => {
   });
 }
 
-const addRow = (address, unspend, time) => {
+const addRow = (address, unspent, time) => {
+  console.log('add one.')
   const stmt = db.prepare('INSERT INTO address_value VALUES(?, ?, ?)');
-  stmt.run([address, unspend, time]);
+  stmt.run([address, unspent, time]);
   stmt.finalize();
 }
 
-const updateRow = (address, unspend, time) => {
-  const stmt = db.prepare('INSERT INTO address_value VALUES(?, ?, ?)');
-  stmt.run([address, unspend, time]);
+const updateRow = (address, unspent, time) => {
+  console.log('update one.')
+  const stmt = db.prepare('UPDATE address_value SET unspent=?, lastime=? where address=?');
+  stmt.run([unspent, time, address]);
   stmt.finalize();
 }
 
@@ -40,23 +42,28 @@ const loopBlock = async (height) => {
       const header = await mvs.heightHeader(height);
       const block = await mvs.block(header.hash);
       const address = utils.listTxAddress(block.txs.transactions);
-      console.log('height::', height, address.length);
+      console.log('>>>>>>>>>>>>height::', height, address.length);
       for(let i=0; i < address.length; i++) {
         const item = address[i];
         const assest = await mvs.balance(item);
-        const hasAddress = await findAddress(address);
-        if (hasAddress) {
-          updateRow(address, assest.unspend, Date.now());
-        } else {
-          addRow(address, assest.unspend, Date.now());
+        assest.unspent = parseInt(assest.unspent);
+        if (assest.unspent > 0) {
+          console.log(assest.address, '::::', assest.unspent); 
+          const hasAddress = await findAddress(item);
+          // console.log('hasAddress::', hasAddress);
+          if (hasAddress) {
+            updateRow(item, assest.unspent, Date.now());
+          } else {
+            addRow(item, assest.unspent, Date.now());
+          }
         }
       }
       loopBlock(height + 1);
-    } catch(e) {
-      console.log(e);
       fs.writeFileSync(path.join(__dirname, './top_step.json'), JSON.stringify({
         stop_height: height
       }));
+    } catch(e) {
+      console.log(e);
     }
 };
 
@@ -68,7 +75,7 @@ function start() {
   });
 }
 
-// start();
+start();
 
 function initTable() {
   db.serialize(function() {
@@ -79,13 +86,12 @@ function initTable() {
 
 function test() {
   db.serialize(function() {
-    findAddress('c').then((res) => {
-      console.log(res);
-    });  
-    // addRow('b', 200, 2);
+    db.each('select * from address_value limit 1', (err, row) => {
+      console.log(row);
+    });
   });
   db.close();
 }
 
-test();
+// test();
 // initTable();
