@@ -23,7 +23,7 @@ export default class Free extends Component {
       address: '',
       captcha: ''
     };
-    // this.loadHistory();
+    this.loadHistory();
 
     this.send = this.send.bind(this);
     this.handleChange = this.handleChange.bind(this);
