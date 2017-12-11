@@ -3,6 +3,9 @@ const utils = require('../utils');
 const moment = require('moment');
 const request = require('request-promise-native');
 const assetsConfig = require('../config/assets');
+const reCAPTCHA = require('recaptcha2');
+
+const recaptcha = new reCAPTCHA(assetsConfig.recaptcha);
 
 const FreeValues = {
     '1': 20000,
@@ -219,49 +222,65 @@ module.exports = {
 
     freeSend: async(ctx, next) => {
         const body = ctx.request.body;
-        const freeAccount = config.freeAccount;
-        if (!body.value) {
-            body.value = '1';
-        }
-        const { lastFreeTime, freeHistory } = ctx.app;
-        // 至少隔10s才能发放一笔
-        if (lastFreeTime && Date.now() - lastFreeTime < 10000) {
+        console.log('send......................')
+        console.log(body);
+        if (!body.captcha) {
             ctx.body = {
-                msg: ctx.lang.hasSendRecently
+                msg: Math.random() * 10000
             };
             return next();
         }
-        // 记录本地执行领取的时间
-        ctx.app.lastFreeTime = Date.now();
-        const balance = await ctx.app.mvs.balance(body.address);
-        if (balance.unspent > 10000) {
+        try {
+            const validate = await recaptcha.validate(body.captcha);
+            const freeAccount = config.freeAccount;
+            if (!body.value) {
+                body.value = '1';
+            }
+            const { lastFreeTime, freeHistory } = ctx.app;
+            // 至少隔10s才能发放一笔
+            if (lastFreeTime && Date.now() - lastFreeTime < 10000) {
+                ctx.body = {
+                    msg: ctx.lang.hasSendRecently
+                };
+                return next();
+            }
+            // 记录本地执行领取的时间
+            ctx.app.lastFreeTime = Date.now();
+            const balance = await ctx.app.mvs.balance(body.address);
+            if (balance.unspent > 10000) {
+                ctx.body = {
+                    msg: ctx.lang.haveBalance
+                };
+                return next();
+            }
+            const res = await ctx.app.mvs.callMethod('send', [
+                freeAccount.accont,
+                freeAccount.password,
+                body.address,
+                FreeValues[body.value]
+            ]);
             ctx.body = {
-                msg: ctx.lang.haveBalance
+                data: body,
+                transaction: res.transaction
+            };
+            if (!freeHistory) {
+                ctx.app.freeHistory = [];
+            }
+            ctx.app.freeHistory.push({
+                address: body.address,
+                value: FreeValues[body.value],
+                time: Date.now()
+            });
+            if (ctx.app.freeHistory.length > 50) {
+                ctx.app.freeHistory.shift();
+            }
+            return next();
+        } catch(e) {
+            ctx.body = {
+                msg: 'validate error.'
             };
             return next();
         }
-        const res = await ctx.app.mvs.callMethod('send', [
-            freeAccount.accont,
-            freeAccount.password,
-            body.address,
-            FreeValues[body.value]
-        ]);
-        ctx.body = {
-            data: body,
-            transaction: res.transaction
-        };
-        if (!freeHistory) {
-            ctx.app.freeHistory = [];
-        }
-        ctx.app.freeHistory.push({
-            address: body.address,
-            value: FreeValues[body.value],
-            time: Date.now()
-        });
-        if (ctx.app.freeHistory.length > 50) {
-            ctx.app.freeHistory.shift();
-        }
-        return next();
     },
 
     freeHistory: async(ctx, next) => {

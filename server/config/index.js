@@ -8,6 +8,10 @@ const config = {
     accont: 'free',
     password: 'free-send',
     address: 'MHkaD2y8eEvTNygGwt9qKZrjDYsU93utNz'
+  },
+  recaptcha: {
+    siteKey: '6LeyfTwUAAAAAJZg_3Qz0BjDhXgIXhiBcKaNeMxH',
+    secretKey: '6LeyfTwUAAAAALp2E0D_cj4lCKHhbHyTnmdVWjzf'
   }
 };
 

@@ -83,7 +83,8 @@ export default {
     notice2: '每分钟内最多发放10笔，足够给新手们当手续费，请不要做无意义的领取。',
     apply: '领取',
     balance: '免费金余额',
-    received: '领取了'
+    received: '领取了',
+    noCaptcha: '请触发进行机器人身份验证(需要翻墙)'
   },
   TX: {
     minningReward: '挖矿奖励',
