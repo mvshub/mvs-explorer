@@ -83,7 +83,8 @@ export default {
     notice2: '10 times in 1 minute at most. Please do not make meaningless collection.',
     apply: 'Apply',
     balance: 'Free balance',
-    received: 'received'
+    received: 'received',
+    noCaptcha: 'Please click the verify.'
   },
   TX: {
     minningReward: 'Minning reward',

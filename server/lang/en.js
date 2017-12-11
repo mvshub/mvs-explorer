@@ -6,5 +6,6 @@ module.exports = {
   noTxHistory: 'No TX history with this address.',
   hasSendRecently: 'Someone has applyed in one minite, please wait a minite.',
   haveBalance: 'There is balance in this address.',
-  serverError: 'Server Error'
+  serverError: 'Server Error',
+  noCaptcha: 'error'
 };

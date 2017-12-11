@@ -5,6 +5,7 @@ import { Spin, Alert, Input, Select, Button, message } from 'antd';
 import * as Api from '@/service';
 import { moment, formatAssetValue } from '@/utils';
 import Lang from '@/lang';
+import Recaptcha from 'react-google-recaptcha';
 
 import './style.less';
 
@@ -19,14 +20,16 @@ export default class Free extends Component {
     super(props)
     this.state = {
       value: '1',
-      address: ''
+      address: '',
+      captcha: ''
     };
-    this.loadHistory();
+    // this.loadHistory();
 
     this.send = this.send.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.setValue = this.setValue.bind(this);
     this.loadHistory = this.loadHistory.bind(this);
+    this.setCaptcha = this.setCaptcha.bind(this);
   }
   componentWillUnmount() {
     if (this.timmer != undefined) {
@@ -42,14 +45,19 @@ export default class Free extends Component {
     });
   }
   send() {
-    const { address, value } = this.state;
+    const { address, value, captcha } = this.state;
     if (!address) {
-      message.error(ListeningStateChangedEvent.Free.noAddressTips);
+      message.error(Lang.Free.noAddressTips);
+      return;
+    }
+    if (!captcha) {
+      message.error(Lang.Free.noCaptcha);
       return;
     }
     Api.freeSend({
       address,
-      value
+      value,
+      captcha
     }).then(res => {
       if (res.msg) {
         message.error(res.msg);
@@ -71,6 +79,11 @@ export default class Free extends Component {
       value: v
     });
   }
+  setCaptcha(v){
+    this.setState({
+      captcha: v
+    });
+  }
   render() {
     const { freeHistory, value, address } = this.state;
     return (
@@ -85,14 +98,18 @@ export default class Free extends Component {
           showIcon
         />
         <div className="from">
-          <InputGroup compact size="large">
-            <Select defaultValue="1" onChange={this.setValue} value={value}>
-              <Option value="1">0.0002</Option>
-              <Option value="2">0.0003</Option>
-            </Select>
-            <Input style={{ width: '50%' }} onChange={this.handleChange} placeholder="ETP接收地址" value={address} />
-            <Button type="primary" size="large" className="btn" onClick={this.send}>{Lang.Free.apply}</Button>
-          </InputGroup>
+            <div className="line">
+              <Input  value="0.0002" disabled/>
+            </div>
+            <div className="line">
+              <Input onChange={this.handleChange} placeholder="ETP接收地址" value={address} />
+            </div>
+            <div className="line">
+              <Recaptcha ref="recaptcha" sitekey="6LeyfTwUAAAAAJZg_3Qz0BjDhXgIXhiBcKaNeMxH" onChange={this.setCaptcha} />
+            </div>
+            <div className="line">
+              <Button type="primary" size="large" className="btn" onClick={this.send}>{Lang.Free.apply}</Button>
+            </div>
         </div>
         
         {freeHistory ? <div>

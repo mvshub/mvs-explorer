@@ -17,7 +17,7 @@ module.exports = merge(webpackBaseConfig, {
       'react-hot-loader/patch',
       // activate HMR for React
 
-      'webpack-dev-server/client?http://localhost',
+      'webpack-dev-server/client?http://local.mymvs.info',
       // bundle the client for webpack-dev-server
       // and connect to the provided endpoint
 
@@ -48,14 +48,14 @@ module.exports = merge(webpackBaseConfig, {
     compress: true,
     historyApiFallback: true,
     port: 80,
-    host: 'localhost',
+    host: 'local.mymvs.info',
     proxy: {
       '/api/**': {
-        target: 'http://localhost:3080/',
+        target: 'http://local.mymvs.info:3080/',
         secure: false
       },
       '/': {
-        target: 'http://localhost:3080/',
+        target: 'http://local.mymvs.info:3080/',
         secure: false
       }
     },
@@ -66,7 +66,7 @@ module.exports = merge(webpackBaseConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new WebpackBrowserPlugin({
       port: 80,
-      url: 'http://localhost',
+      url: 'http://local.mymvs.info',
       browser: 'Chrome'
     }),
     new ExtractTextPlugin({
