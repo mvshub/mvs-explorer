@@ -47,11 +47,11 @@ export default class Free extends Component {
   send() {
     const { address, value, captcha } = this.state;
     if (!address) {
-      message.error(ListeningStateChangedEvent.Free.noAddressTips);
+      message.error(Lang.Free.noAddressTips);
       return;
     }
     if (!captcha) {
-      message.error(ListeningStateChangedEvent.Free.noCaptcha);
+      message.error(Lang.Free.noCaptcha);
       return;
     }
     Api.freeSend({
