@@ -5,7 +5,7 @@ const request = require('request-promise-native');
 const assetsConfig = require('../config/assets');
 const reCAPTCHA = require('recaptcha2');
 
-const recaptcha = new reCAPTCHA(assetsConfig.recaptcha);
+const recaptcha = new reCAPTCHA(config.recaptcha);
 
 const FreeValues = {
     '1': 20000,
