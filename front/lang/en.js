@@ -16,7 +16,7 @@ export default {
     assets: 'Assets',
     free: 'Free ETP',
     search: 'address/hash/block',
-    rich: 'Rich List'
+    rich: 'Fortune'
   },
   Index: {
     difficulty: 'Difficulty',
@@ -104,7 +104,7 @@ export default {
     block: 'Block'
   },
   RichList: {
-    title: 'Rich List',
+    title: 'Fortune',
     rank: 'Rank',
     address: 'Address',
     balance: 'Unspent',

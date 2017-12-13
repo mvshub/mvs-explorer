@@ -20,6 +20,7 @@ const route = <Route path="/" component={App}>
   <Route path="charts" component={Charts} />
   <Route path="free" component={Free} />
   <Route path="rich" component={RichList} />
+  <Route path="fortune" component={RichList} />
   <Route path="*" component={Index} />
 </Route>;
 

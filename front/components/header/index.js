@@ -61,7 +61,7 @@ export default class Header extends Component {
           <div className="menus">
             <Link to="/">{Lang.Header.home}</Link>
             <Link to="/charts">{Lang.Header.charts}</Link>
-            <Link to="/rich">{Lang.Header.rich}</Link>
+            <Link to="/fortune">{Lang.Header.rich}</Link>
             <Link to="/assets">{Lang.Header.assets}</Link>
             <Link to="/free">{Lang.Header.free}</Link>
             <Dropdown overlay={menu}>
