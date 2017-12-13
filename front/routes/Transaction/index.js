@@ -3,8 +3,8 @@ import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Spin, Table, Row, Col, Icon  } from 'antd';
 import TxList from '~/tx-list';
-import * as Api from '@/service';
-import Lang from '@/lang';
+import * as Api from '#/service';
+import Lang from '#/lang';
 
 import './style.less';
 

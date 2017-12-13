@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Spin, Table, Row, Col, Icon, Popover, Pagination  } from 'antd';
-import * as Api from '@/service';
-import { moment, formatTime, formatAssetValue } from '@/utils';
+import * as Api from '#/service';
+import { moment, formatTime, formatAssetValue } from '#/utils';
 import TxLoader from './txloader';
 import TxList from '~/tx-list';
-import Lang from '@/lang';
+import Lang from '#/lang';
 
 import './style.less';
 

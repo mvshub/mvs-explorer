@@ -15,7 +15,7 @@
           "rootPathSuffix": "front/components"
         },
         {
-          "rootPathPrefix": "@",
+          "rootPathPrefix": "#",
           "rootPathSuffix": "front"
         }
       ]

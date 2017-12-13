@@ -2,6 +2,91 @@
 # yarn lockfile v1
 
 
+"@antv/data-set@^0.5.0":
+  version "0.5.4"
+  resolved "http://registry.npm.taobao.org/@antv/data-set/download/@antv/data-set-0.5.4.tgz#473b9899459e5ef61a7cf6def977966bd2148dc2"
+  dependencies:
+    d3-array "^1.2.0"
+    d3-composite-projections "^1.2.0"
+    d3-dsv "^1.0.5"
+    d3-geo "^1.6.4"
+    d3-geo-projection "^2.1.2"
+    d3-hierarchy "^1.1.5"
+    d3-sankey "^0.7.1"
+    d3-voronoi "^1.1.2"
+    lodash "^4.17.4"
+    point-at-length "^1.0.2"
+    regression "^2.0.0"
+    simple-statistics "^4.1.0"
+    topojson-client "^3.0.0"
+    wolfy87-eventemitter "^5.1.0"
+
+"@antv/data-set@^0.8.0":
+  version "0.8.0"
+  resolved "http://registry.npm.taobao.org/@antv/data-set/download/@antv/data-set-0.8.0.tgz#c40b501fde3d4dc408ee8826bd8351454bcf5d97"
+  dependencies:
+    d3-array "~1.2.0"
+    d3-composite-projections "~1.2.0"
+    d3-dsv "~1.0.5"
+    d3-geo "~1.6.4"
+    d3-geo-projection "~2.1.2"
+    d3-hierarchy "~1.1.5"
+    d3-sankey "~0.7.1"
+    d3-voronoi "~1.1.2"
+    lodash "~4.17.4"
+    point-at-length "~1.0.2"
+    regression "~2.0.0"
+    simple-statistics "~4.1.0"
+    topojson-client "~3.0.0"
+    wolfy87-eventemitter "~5.1.0"
+
+"@antv/g2@3.0.0":
+  version "3.0.0"
+  resolved "http://registry.npm.taobao.org/@antv/g2/download/@antv/g2-3.0.0.tgz#254c204309ac26b10c192828ebbf731dc4f15326"
+  dependencies:
+    "@antv/g" "^2.0.0"
+    fecha "^2.3.1"
+    gl-matrix "^2.4.0"
+    lodash "^4.17.4"
+    wolfy87-eventemitter "^5.2.0"
+
+"@antv/g2@^3.0.0":
+  version "3.0.1"
+  resolved "http://registry.npm.taobao.org/@antv/g2/download/@antv/g2-3.0.1.tgz#b3bd40a6180f680fb420f710b9212b324f3ff2cc"
+  dependencies:
+    "@antv/g" "^2.0.0"
+    fecha "^2.3.1"
+    gl-matrix "^2.4.0"
+    lodash "^4.17.4"
+    wolfy87-eventemitter "^5.2.0"
+
+"@antv/g@^2.0.0":
+  version "2.0.2"
+  resolved "http://registry.npm.taobao.org/@antv/g/download/@antv/g-2.0.2.tgz#cfceda948ab595f64c90a525f30a7e4ce4a2e3e2"
+  dependencies:
+    d3-ease "^1.0.3"
+    d3-interpolate "^1.1.5"
+    d3-timer "^1.0.6"
+    gl-matrix "^2.3.2"
+    lodash "^4.17.4"
+    wolfy87-eventemitter "^5.1.0"
+
+"@types/d3-format@*":
+  version "1.2.1"
+  resolved "http://registry.npm.taobao.org/@types/d3-format/download/@types/d3-format-1.2.1.tgz#9435fb1771d2fbf6a858c93218f4097c9aa396c1"
+
+"@types/lodash@*":
+  version "4.14.88"
+  resolved "http://registry.npm.taobao.org/@types/lodash/download/@types/lodash-4.14.88.tgz#97eaf2dc668f33ed8e511a5b627035f4ea20b0f5"
+
+"@types/node@*", "@types/node@^8.0.53":
+  version "8.0.58"
+  resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-8.0.58.tgz#5b3881c0be3a646874803fee3197ea7f1ed6df90"
+
+"@types/prop-types@*":
+  version "15.5.2"
+  resolved "http://registry.npm.taobao.org/@types/prop-types/download/@types/prop-types-15.5.2.tgz#3c6b8dceb2906cc87fe4358e809f9d20c8d59be1"
+
 JSONStream@1.0.3:
   version "1.0.3"
   resolved "http://registry.npm.taobao.org/JSONStream/download/JSONStream-1.0.3.tgz#728544189438b7b9dd2184392581861ebabd9621"
@@ -12,6 +97,10 @@ JSONStream@1.0.3:
 abbrev@1:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/abbrev/download/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
+
+abs-svg-path@~0.1.1:
+  version "0.1.1"
+  resolved "http://registry.npm.taobao.org/abs-svg-path/download/abs-svg-path-0.1.1.tgz#df601c8e8d2ba10d4a76d625e236a9a39c2723bf"
 
 accepts@1.3.3:
   version "1.3.3"
@@ -1264,6 +1353,15 @@ binascii@^0.0.1:
   version "0.0.1"
   resolved "http://registry.npm.taobao.org/binascii/download/binascii-0.0.1.tgz#58638aad5158ecd1e926c421aec77b68371f0b5a"
 
+bizcharts@^3.0.4:
+  version "3.0.4"
+  resolved "http://registry.npm.taobao.org/bizcharts/download/bizcharts-3.0.4.tgz#496df203324ef569551096f4415fd4455247a366"
+  dependencies:
+    "@antv/g2" "3.0.0"
+    invariant "^2.2.2"
+    prop-types "^15.6.0"
+    warning "^3.0.0"
+
 blessed@^0.1.81:
   version "0.1.81"
   resolved "http://registry.npm.taobao.org/blessed/download/blessed-0.1.81.tgz#f962d687ec2c369570ae71af843256e6d0ca1129"
@@ -1776,6 +1874,10 @@ commander@1.3.2:
   dependencies:
     keypress "0.1.x"
 
+commander@2:
+  version "2.12.2"
+  resolved "http://registry.npm.taobao.org/commander/download/commander-2.12.2.tgz#0f5946c427ed9ec0d91a46bb9def53e54650e555"
+
 commander@2.8.x:
   version "2.8.1"
   resolved "http://registry.npm.taobao.org/commander/download/commander-2.8.1.tgz#06be367febfda0c330aa1e2a072d3dc9762425d4"
@@ -2180,6 +2282,111 @@ csurf@~1.8.3:
     cookie-signature "1.0.6"
     csrf "~3.0.0"
     http-errors "~1.3.1"
+
+d3-array@1, d3-array@^1.2.0, d3-array@~1.2.0:
+  version "1.2.1"
+  resolved "http://registry.npm.taobao.org/d3-array/download/d3-array-1.2.1.tgz#d1ca33de2f6ac31efadb8e050a021d7e2396d5dc"
+
+d3-collection@1:
+  version "1.0.4"
+  resolved "http://registry.npm.taobao.org/d3-collection/download/d3-collection-1.0.4.tgz#342dfd12837c90974f33f1cc0a785aea570dcdc2"
+
+d3-color@1:
+  version "1.0.3"
+  resolved "http://registry.npm.taobao.org/d3-color/download/d3-color-1.0.3.tgz#bc7643fca8e53a8347e2fbdaffa236796b58509b"
+
+d3-composite-projections@^1.2.0, d3-composite-projections@~1.2.0:
+  version "1.2.0"
+  resolved "http://registry.npm.taobao.org/d3-composite-projections/download/d3-composite-projections-1.2.0.tgz#fa0e6f1442f17d04643843a3a883c7d94e0c27c0"
+  dependencies:
+    d3-geo "1.2.4"
+    d3-path "^1.0.1"
+
+d3-dsv@^1.0.5, d3-dsv@~1.0.5:
+  version "1.0.8"
+  resolved "http://registry.npm.taobao.org/d3-dsv/download/d3-dsv-1.0.8.tgz#907e240d57b386618dc56468bacfe76bf19764ae"
+  dependencies:
+    commander "2"
+    iconv-lite "0.4"
+    rw "1"
+
+d3-ease@^1.0.3:
+  version "1.0.3"
+  resolved "http://registry.npm.taobao.org/d3-ease/download/d3-ease-1.0.3.tgz#68bfbc349338a380c44d8acc4fbc3304aa2d8c0e"
+
+d3-format@^1.2.0:
+  version "1.2.1"
+  resolved "http://registry.npm.taobao.org/d3-format/download/d3-format-1.2.1.tgz#4e19ecdb081a341dafaf5f555ee956bcfdbf167f"
+
+d3-geo-projection@^2.1.2:
+  version "2.3.2"
+  resolved "http://registry.npm.taobao.org/d3-geo-projection/download/d3-geo-projection-2.3.2.tgz#72e559dc05d97fa9f218ccc9c537d329f4cfc474"
+  dependencies:
+    commander "2"
+    d3-array "1"
+    d3-geo "^1.7.1"
+
+d3-geo-projection@~2.1.2:
+  version "2.1.2"
+  resolved "http://registry.npm.taobao.org/d3-geo-projection/download/d3-geo-projection-2.1.2.tgz#7df8e1e9d046d631c6509f7e531357d4adc24aa3"
+  dependencies:
+    commander "2"
+    d3-array "1"
+    d3-geo "^1.1.0"
+
+d3-geo@1.2.4:
+  version "1.2.4"
+  resolved "http://registry.npm.taobao.org/d3-geo/download/d3-geo-1.2.4.tgz#d179f3baa76e623ef1e0d83693db705b7c599006"
+  dependencies:
+    d3-array "1"
+
+d3-geo@^1.1.0, d3-geo@^1.6.4, d3-geo@^1.7.1:
+  version "1.9.1"
+  resolved "http://registry.npm.taobao.org/d3-geo/download/d3-geo-1.9.1.tgz#157e3b0f917379d0f73bebfff3be537f49fa7356"
+  dependencies:
+    d3-array "1"
+
+d3-geo@~1.6.4:
+  version "1.6.4"
+  resolved "http://registry.npm.taobao.org/d3-geo/download/d3-geo-1.6.4.tgz#f20e1e461cb1845f5a8be55ab6f876542a7e3199"
+  dependencies:
+    d3-array "1"
+
+d3-hierarchy@^1.1.5, d3-hierarchy@~1.1.5:
+  version "1.1.5"
+  resolved "http://registry.npm.taobao.org/d3-hierarchy/download/d3-hierarchy-1.1.5.tgz#a1c845c42f84a206bcf1c01c01098ea4ddaa7a26"
+
+d3-interpolate@^1.1.5:
+  version "1.1.6"
+  resolved "http://registry.npm.taobao.org/d3-interpolate/download/d3-interpolate-1.1.6.tgz#2cf395ae2381804df08aa1bf766b7f97b5f68fb6"
+  dependencies:
+    d3-color "1"
+
+d3-path@1, d3-path@^1.0.1:
+  version "1.0.5"
+  resolved "http://registry.npm.taobao.org/d3-path/download/d3-path-1.0.5.tgz#241eb1849bd9e9e8021c0d0a799f8a0e8e441764"
+
+d3-sankey@^0.7.1, d3-sankey@~0.7.1:
+  version "0.7.1"
+  resolved "http://registry.npm.taobao.org/d3-sankey/download/d3-sankey-0.7.1.tgz#d229832268fc69a7fec84803e96c2256a614c521"
+  dependencies:
+    d3-array "1"
+    d3-collection "1"
+    d3-shape "^1.2.0"
+
+d3-shape@^1.2.0:
+  version "1.2.0"
+  resolved "http://registry.npm.taobao.org/d3-shape/download/d3-shape-1.2.0.tgz#45d01538f064bafd05ea3d6d2cb748fd8c41f777"
+  dependencies:
+    d3-path "1"
+
+d3-timer@^1.0.6:
+  version "1.0.7"
+  resolved "http://registry.npm.taobao.org/d3-timer/download/d3-timer-1.0.7.tgz#df9650ca587f6c96607ff4e60cc38229e8dd8531"
+
+d3-voronoi@^1.1.2, d3-voronoi@~1.1.2:
+  version "1.1.2"
+  resolved "http://registry.npm.taobao.org/d3-voronoi/download/d3-voronoi-1.1.2.tgz#1687667e8f13a2d158c80c1480c5a29cb0d8973c"
 
 dashdash@^1.12.0:
   version "1.14.1"
@@ -2936,6 +3143,10 @@ fbjs@^0.8.16:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.9"
 
+fecha@^2.3.1:
+  version "2.3.2"
+  resolved "http://registry.npm.taobao.org/fecha/download/fecha-2.3.2.tgz#360f035dd6edd954bc9581f95f2a4a7f2a3505c1"
+
 file-loader@0.11.1:
   version "0.11.1"
   resolved "http://registry.npm.taobao.org/file-loader/download/file-loader-0.11.1.tgz#6b328ee1234a729e4e47d36375dd6d35c0e1db84"
@@ -3229,6 +3440,10 @@ getpass@^0.1.1:
   resolved "http://registry.npm.taobao.org/getpass/download/getpass-0.1.7.tgz#5eff8e3e684d569ae4cb2b1282604e8ba62149fa"
   dependencies:
     assert-plus "^1.0.0"
+
+gl-matrix@^2.3.2, gl-matrix@^2.4.0:
+  version "2.4.0"
+  resolved "http://registry.npm.taobao.org/gl-matrix/download/gl-matrix-2.4.0.tgz#2089b13301a29eec822d9d99dffc1f78ee9a3c50"
 
 glob-base@^0.3.0:
   version "0.3.0"
@@ -3763,6 +3978,10 @@ humanize-ms@^1.2.0:
   dependencies:
     ms "^2.0.0"
 
+iconv-lite@0.4, iconv-lite@0.4.19, iconv-lite@^0.4.15, iconv-lite@~0.4.13:
+  version "0.4.19"
+  resolved "http://registry.npm.taobao.org/iconv-lite/download/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
+
 iconv-lite@0.4.11:
   version "0.4.11"
   resolved "http://registry.npm.taobao.org/iconv-lite/download/iconv-lite-0.4.11.tgz#2ecb42fd294744922209a2e7c404dac8793d8ade"
@@ -3770,10 +3989,6 @@ iconv-lite@0.4.11:
 iconv-lite@0.4.13:
   version "0.4.13"
   resolved "http://registry.npm.taobao.org/iconv-lite/download/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
-
-iconv-lite@0.4.19, iconv-lite@^0.4.15, iconv-lite@~0.4.13:
-  version "0.4.19"
-  resolved "http://registry.npm.taobao.org/iconv-lite/download/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
 icss-replace-symbols@^1.1.0:
   version "1.1.0"
@@ -4074,7 +4289,7 @@ is-windows@^0.2.0:
   version "0.2.0"
   resolved "http://registry.npm.taobao.org/is-windows/download/is-windows-0.2.0.tgz#de1aa6d63ea29dd248737b69f1ff8b8002d2108c"
 
-isarray@0.0.1:
+isarray@0.0.1, isarray@~0.0.1:
   version "0.0.1"
   resolved "http://registry.npm.taobao.org/isarray/download/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
 
@@ -4769,7 +4984,7 @@ lodash@^3.10.1:
   version "3.10.1"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.13.1, lodash@^4.14.0, lodash@^4.16.5, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.6.1:
+lodash@^4.13.1, lodash@^4.14.0, lodash@^4.16.5, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.6.1, lodash@~4.17.4:
   version "4.17.4"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -5439,6 +5654,10 @@ parse-passwd@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/parse-passwd/download/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
 
+parse-svg-path@~0.1.1:
+  version "0.1.2"
+  resolved "http://registry.npm.taobao.org/parse-svg-path/download/parse-svg-path-0.1.2.tgz#7a7ec0d1eb06fa5325c7d3e009b859a09b5d49eb"
+
 parsejson@0.0.3:
   version "0.0.3"
   resolved "http://registry.npm.taobao.org/parsejson/download/parsejson-0.0.3.tgz#ab7e3759f209ece99437973f7d0f1f64ae0e64ab"
@@ -5558,6 +5777,22 @@ pkg-dir@^1.0.0:
 platform@^1.3.1:
   version "1.3.4"
   resolved "http://registry.npm.taobao.org/platform/download/platform-1.3.4.tgz#6f0fb17edaaa48f21442b3a975c063130f1c3ebd"
+
+point-at-length@^1.0.2:
+  version "1.1.0"
+  resolved "http://registry.npm.taobao.org/point-at-length/download/point-at-length-1.1.0.tgz#0ad72ebd0980d7f5a1ab12296c055f9eb6b30e57"
+  dependencies:
+    abs-svg-path "~0.1.1"
+    isarray "~0.0.1"
+    parse-svg-path "~0.1.1"
+
+point-at-length@~1.0.2:
+  version "1.0.2"
+  resolved "http://registry.npm.taobao.org/point-at-length/download/point-at-length-1.0.2.tgz#9176d8d6d7c8162f12b646f707db9f0ea728125e"
+  dependencies:
+    abs-svg-path "~0.1.1"
+    isarray "~0.0.1"
+    parse-svg-path "~0.1.1"
 
 portfinder@^1.0.9:
   version "1.0.13"
@@ -5904,7 +6139,7 @@ prop-types@15.x, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, pro
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
 
-prop-types@>=15.5.0:
+prop-types@>=15.5.0, prop-types@^15.6.0:
   version "15.6.0"
   resolved "http://registry.npm.taobao.org/prop-types/download/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -6765,6 +7000,10 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
+regression@^2.0.0, regression@~2.0.0:
+  version "2.0.1"
+  resolved "http://registry.npm.taobao.org/regression/download/regression-2.0.1.tgz#8d29c3e8224a10850c35e337e85a8b2fac3b0c87"
+
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/remove-trailing-separator/download/remove-trailing-separator-1.1.0.tgz#c24bce2a283adad5bc3f58e0d48249b92379d8ef"
@@ -6968,6 +7207,10 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
 rndm@1.2.0:
   version "1.2.0"
   resolved "http://registry.npm.taobao.org/rndm/download/rndm-1.2.0.tgz#f33fe9cfb52bbfd520aa18323bc65db110a1b76c"
+
+rw@1:
+  version "1.3.3"
+  resolved "http://registry.npm.taobao.org/rw/download/rw-1.3.3.tgz#3f862dfa91ab766b14885ef4d01124bfda074fb4"
 
 rx@4.1.0:
   version "4.1.0"
@@ -7204,6 +7447,10 @@ sigmund@~1.0.0:
 signal-exit@^3.0.0:
   version "3.0.2"
   resolved "http://registry.npm.taobao.org/signal-exit/download/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+
+simple-statistics@^4.1.0, simple-statistics@~4.1.0:
+  version "4.1.1"
+  resolved "http://registry.npm.taobao.org/simple-statistics/download/simple-statistics-4.1.1.tgz#533c48d48336ba3d350d8135f20fa7138acb0c7d"
 
 slash@^1.0.0:
   version "1.0.0"
@@ -7755,6 +8002,12 @@ token-stream@0.0.1:
   version "0.0.1"
   resolved "http://registry.npm.taobao.org/token-stream/download/token-stream-0.0.1.tgz#ceeefc717a76c4316f126d0b9dbaa55d7e7df01a"
 
+topojson-client@^3.0.0, topojson-client@~3.0.0:
+  version "3.0.0"
+  resolved "http://registry.npm.taobao.org/topojson-client/download/topojson-client-3.0.0.tgz#1f99293a77ef42a448d032a81aa982b73f360d2f"
+  dependencies:
+    commander "2"
+
 tough-cookie@>=2.3.0, tough-cookie@~2.3.0, tough-cookie@~2.3.2:
   version "2.3.2"
   resolved "http://registry.npm.taobao.org/tough-cookie/download/tough-cookie-2.3.2.tgz#f081f76e4c85720e6c37a5faced737150d84072a"
@@ -8037,6 +8290,27 @@ vinyl@^0.5.0:
     clone-stats "^0.0.1"
     replace-ext "0.0.1"
 
+viser-react@^1.3.0:
+  version "1.3.0"
+  resolved "http://registry.npm.taobao.org/viser-react/download/viser-react-1.3.0.tgz#348af88103d87c19dfebf7bce0fffdca85de1418"
+  dependencies:
+    "@types/node" "*"
+    "@types/prop-types" "*"
+    prop-types "^15.6.0"
+    viser "^1.0.0"
+
+viser@^1.0.0:
+  version "1.3.2"
+  resolved "http://registry.npm.taobao.org/viser/download/viser-1.3.2.tgz#7dea1ccf4260b89bdb2eac25eea9a274acfafee9"
+  dependencies:
+    "@antv/data-set" "^0.5.0"
+    "@antv/g2" "^3.0.0"
+    "@types/d3-format" "*"
+    "@types/lodash" "*"
+    "@types/node" "^8.0.53"
+    d3-format "^1.2.0"
+    lodash "^4.17.4"
+
 vm-browserify@0.0.4:
   version "0.0.4"
   resolved "http://registry.npm.taobao.org/vm-browserify/download/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
@@ -8250,6 +8524,14 @@ with@^5.0.0:
   dependencies:
     acorn "^3.1.0"
     acorn-globals "^3.0.0"
+
+wolfy87-eventemitter@^5.1.0, wolfy87-eventemitter@^5.2.0:
+  version "5.2.4"
+  resolved "http://registry.npm.taobao.org/wolfy87-eventemitter/download/wolfy87-eventemitter-5.2.4.tgz#5021d2952d3611cbcd195149711d9b595cd11d48"
+
+wolfy87-eventemitter@~5.1.0:
+  version "5.1.0"
+  resolved "http://registry.npm.taobao.org/wolfy87-eventemitter/download/wolfy87-eventemitter-5.1.0.tgz#35c1ac0dd1ac0c15e35d981508fc22084a13a011"
 
 wordwrap@0.0.2:
   version "0.0.2"

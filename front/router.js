@@ -9,6 +9,7 @@ import Address from './routes/Address';
 import Assets from './routes/Assets';
 import Charts from './routes/Charts';
 import Free from './routes/Free';
+import RichList from './routes/RichList';
 
 const route = <Route path="/" component={App}>
   <Route path="index" component={Index} />
@@ -18,6 +19,7 @@ const route = <Route path="/" component={App}>
   <Route path="assets" component={Assets} />
   <Route path="charts" component={Charts} />
   <Route path="free" component={Free} />
+  <Route path="rich" component={RichList} />
   <Route path="*" component={Index} />
 </Route>;
 

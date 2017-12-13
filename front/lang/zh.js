@@ -15,7 +15,8 @@ export default {
     charts: '图表',
     assets: '资产列表',
     free: '免费领币',
-    search: '地址/哈希/区块'
+    search: '地址/哈希/区块',
+    rich: '富豪榜'
   },
   Index: {
     difficulty: '难度',
@@ -101,5 +102,21 @@ export default {
     transfer: '转账',
     lockHeight: '解锁高度',
     block: '区块'
+  },
+  RichList: {
+    title: '财富榜',
+    rank: '排名',
+    address: '地址',
+    balance: '余额',
+    frozen: '锁仓',
+    percent: '占比',
+    endBLock: '统计截止高度',
+    over0: '大于0地址数',
+    supply: 'ETP总量',
+    frozen: 'ETP锁仓量',
+    over1w: '余额>1w',
+    over1k: '余额1k-1w',
+    over100: '余额100-1k',
+    less100: '余额<100'
   }
 };

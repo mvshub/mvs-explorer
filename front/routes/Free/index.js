@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Spin, Alert, Input, Select, Button, message } from 'antd';
-import * as Api from '@/service';
-import { moment, formatAssetValue } from '@/utils';
-import Lang from '@/lang';
+import * as Api from '#/service';
+import { moment, formatAssetValue } from '#/utils';
+import Lang from '#/lang';
 import Recaptcha from 'react-google-recaptcha';
 
 import './style.less';

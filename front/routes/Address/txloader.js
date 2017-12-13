@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Spin } from 'antd';
 import TxList from '~/tx-list';
-import * as Api from '@/service';
-import { formatTime } from '@/utils';
+import * as Api from '#/service';
+import { formatTime } from '#/utils';
 
 export default class TxLoader extends Component {
   constructor(props) {

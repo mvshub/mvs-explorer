@@ -12,9 +12,9 @@ router.get('/api/address/:id', api.addressOverview);
 router.get('/api/assets', api.assets);
 router.post('/api/free-send', api.freeSend);
 router.get('/api/free-history', api.freeHistory);
-router.get('/api/test', api.index);
-
-
 router.get('/api/dayreport', api.dayReport);
+router.get('/api/topoverview', api.topOverview);
+router.get('/api/toplist', api.topList);
+router.get('/api/test', api.index);
 
 module.exports = router;

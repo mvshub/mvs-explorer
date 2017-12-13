@@ -87,5 +87,17 @@ module.exports = {
     },
     isDepositTx(tx){
         // tx.outputs
+    },
+    toPromise(fun, context, args) {
+        return new Promise((resolve, reject) => {
+            args.push((err, res) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(res);
+            });
+            fun.apply(context, args);
+        });
     }
 }

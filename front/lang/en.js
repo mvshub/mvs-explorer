@@ -15,7 +15,8 @@ export default {
     charts: 'Charts',
     assets: 'Assets',
     free: 'Free ETP',
-    search: 'address/hash/block'
+    search: 'address/hash/block',
+    rich: 'Rich List'
   },
   Index: {
     difficulty: 'Difficulty',
@@ -101,5 +102,21 @@ export default {
     transfer: 'Transfer',
     lockHeight: 'LockHeight',
     block: 'Block'
+  },
+  RichList: {
+    title: 'Rich List',
+    rank: 'Rank',
+    address: 'Address',
+    balance: 'Unspent',
+    frozen: 'Frozen',
+    percent: 'Percent',
+    endBLock: 'End Count Height',
+    over0: 'Address Count(> 0)',
+    supply: 'Total Supply',
+    frozen: 'Current Frozen',
+    over1w: 'Balance>10K',
+    over1k: 'Balance1K-10K',
+    over100: 'Balance100-1K',
+    less100: 'Balance<100'
   }
 };

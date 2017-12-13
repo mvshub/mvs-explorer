@@ -4,7 +4,7 @@ const moment = require('moment');
 const request = require('request-promise-native');
 const assetsConfig = require('../config/assets');
 const reCAPTCHA = require('recaptcha2');
-
+const fs = require('fs');
 const recaptcha = new reCAPTCHA(config.recaptcha);
 
 const FreeValues = {
@@ -222,8 +222,6 @@ module.exports = {
 
     freeSend: async(ctx, next) => {
         const body = ctx.request.body;
-        console.log('send......................')
-        console.log(body);
         if (!body.captcha) {
             ctx.body = {
                 msg: Math.random() * 10000
@@ -289,6 +287,42 @@ module.exports = {
             data: {
                 balance: balance.unspent,
                 history: ctx.app.freeHistory ? ctx.app.freeHistory.reverse() : []
+            }
+        };
+        return next();
+    },
+
+    topOverview: async(ctx, next) => {
+        const sqlite = ctx.app.sqliteDb;
+        const addressCount = await utils.toPromise(sqlite.get, sqlite, ['select count(*) as value from address_value']);
+        const balance_over_1w = await utils.toPromise(sqlite.get, sqlite, ['select count(*) as value from address_value where unspent >= 1000000000000']);
+        const balance_1k_1w = await utils.toPromise(sqlite.get, sqlite, ['select count(*) as value from address_value where unspent >= 100000000000 and unspent < 1000000000000']);
+        const balance_100_1k = await utils.toPromise(sqlite.get, sqlite, ['select count(*) as value from address_value where unspent >= 10000000000 and unspent < 100000000000']);
+        const supply = await utils.toPromise(sqlite.get, sqlite, ['select sum(unspent) as value from address_value']);
+        const frozen = await utils.toPromise(sqlite.get, sqlite, ['select sum(frozen) as value from address_value']);
+        const setpLog = fs.readFileSync('./server/script/top_step.json');
+        ctx.body = {
+            data: {
+                addressCount: addressCount.value,
+                balance_over_1w: balance_over_1w.value,
+                balance_1k_1w: balance_1k_1w.value,
+                balance_100_1k: balance_100_1k.value,
+                supply: supply.value,
+                frozen: frozen.value,
+                endBlock: JSON.parse(setpLog).stop_height
+            }
+        };
+        return next();
+    },
+
+    topList:async(ctx, next) => {
+        const { page = 1, sort = 'unspent', order = 'desc' } = ctx.query;
+        const sqlite = ctx.app.sqliteDb;
+        const list = await utils.toPromise(sqlite.all, sqlite, [`select * from address_value order by ${sort} ${order} limit ${100 * (page - 1)}, 100`]);
+        ctx.body = {
+            data: {
+                list,
+                page
             }
         };
         return next();
