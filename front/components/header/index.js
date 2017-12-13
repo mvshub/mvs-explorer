@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import cx from 'classnames';
 import { Link } from 'dva/router';
 import { Input, message, Menu, Dropdown, Icon } from 'antd';
-import Lang from '@/lang';
+import Lang from '#/lang';
 
 import './style.less';
 
@@ -61,6 +61,7 @@ export default class Header extends Component {
           <div className="menus">
             <Link to="/">{Lang.Header.home}</Link>
             <Link to="/charts">{Lang.Header.charts}</Link>
+            <Link to="/fortune">{Lang.Header.rich}</Link>
             <Link to="/assets">{Lang.Header.assets}</Link>
             <Link to="/free">{Lang.Header.free}</Link>
             <Dropdown overlay={menu}>

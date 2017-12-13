@@ -40,3 +40,11 @@ export const getFreeHistory = () => (
 export const freeSend = (data) => (
   axios.post(`/api/free-send`, data)
 );
+
+export const getRichOverview = () => (
+  axios.get(`/api/topoverview`)
+);
+
+export const getRichList = (page = 1, sort, order) => (
+  axios.get(`/api/toplist?page=${page}&sort=${sort}&order=${order}`, )
+);

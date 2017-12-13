@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'dva/router';
 import { Row, Col, Icon, Tag } from 'antd';
-import { formatAssetValue, formatTime, parseLockHeight } from '@/utils';
-import Lang from '@/lang';
+import { formatAssetValue, formatTime, parseLockHeight } from '#/utils';
+import Lang from '#/lang';
 
 import './style.less';
 

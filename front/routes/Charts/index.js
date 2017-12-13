@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Spin, Table, Radio } from 'antd';
-import * as Api from '@/service';
-import { moment, formatTime, formatAssetValue } from '@/utils';
+import * as Api from '#/service';
+import { moment, formatTime, formatAssetValue } from '#/utils';
 import createG2 from 'g2-react';
 import { Stat } from 'g2';
-import Lang from '@/lang';
+import Lang from '#/lang';
 
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;

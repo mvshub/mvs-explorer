@@ -7,16 +7,22 @@ const db = require('./server/models');
 const koaBody = require('koa-body');
 const config = require('./server/config');
 const Lang = require('./server/lang');
+const sqlite3 = require('sqlite3').verbose();
 
 const app = new Koa();
 
 // 加载数据库
 db(app);
 
+//sqlite
+const sqliteDb = new sqlite3.Database('./server/data/mymvs.db');
+sqliteDb.serialize(function() {
+  app.sqliteDb = sqliteDb;
+});
+
 // 映射语言
 app.use(async (ctx, next) => {
   let lang = 'en';
-  console.log(ctx.headers);
   if (ctx.headers.lang) {
     lang = ctx.headers.lang;
   } else if (ctx.headers['accept-language'] && ctx.headers['accept-language'].indexOf('zh') > -1) {
@@ -89,3 +95,9 @@ if (config.schedule) {
     }
   }, 1000 * 60 * 60);
 }
+
+// 每个10分钟运行地址统计
+const topCount = require('./server/script/top_count');
+setInterval(() => {
+  topCount();
+}, 1000 * 60 * 60);

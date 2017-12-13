@@ -5,7 +5,7 @@ import { Breadcrumb, Menu, Icon } from 'antd';
 import classnames from 'classnames';
 import Header from '~/header';
 import Index from '../Index';
-import Lang from '@/lang';
+import Lang from '#/lang';
 
 import './style.less';
 

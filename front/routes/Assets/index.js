@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Spin, Table } from 'antd';
-import * as Api from '@/service';
-import { moment, formatTime } from '@/utils';
-import Lang from '@/lang';
+import * as Api from '#/service';
+import { moment, formatTime } from '#/utils';
+import Lang from '#/lang';
 
 import './style.less';
 

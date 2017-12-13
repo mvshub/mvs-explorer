@@ -9,7 +9,7 @@ const stepLog = require('./top_step.json');
 const config = require('../config');
 
 const mvs = new Mvs(config.rpcServer);
-const db = new sqlite3.Database('../data/mymvs.db');
+const db = new sqlite3.Database(path.join(__dirname, '../data/mymvs.db'));
 
 const findAddress = (address) => {
   return new Promise((res, rej) => {
@@ -23,17 +23,17 @@ const findAddress = (address) => {
   });
 };
 
-const addRow = (address, unspent, time) => {
+const addRow = (address, unspent, frozen, time) => {
   console.log('add one.')
-  const stmt = db.prepare('INSERT INTO address_value VALUES(?, ?, ?)');
-  stmt.run([address, unspent, time]);
+  const stmt = db.prepare('INSERT INTO address_value VALUES(?, ?, ?, ?)');
+  stmt.run([address, unspent, frozen, time]);
   stmt.finalize();
 }
 
-const updateRow = (address, unspent, time) => {
+const updateRow = (address, unspent, frozen, time) => {
   console.log('update one.')
-  const stmt = db.prepare('UPDATE address_value SET unspent=?, lastime=? where address=?');
-  stmt.run([unspent, time, address]);
+  const stmt = db.prepare('UPDATE address_value SET unspent=?, frozen=?, lastime=? where address=?');
+  stmt.run([unspent, frozen, time, address]);
   stmt.finalize();
 }
 
@@ -41,10 +41,10 @@ let cacheAddress = {};
 let lastCacheHeight = 0;
 let lasCacheTime = 0;
 const loopBlock = async (height) => {
-  // 更新到774045为止
-  if (height > 774045) {
-    return;
-  }
+  // 终止高度
+  // if (height > 783636) {
+  //   return;
+  // }
   try{
     const header = await mvs.heightHeader(height);
     const block = await mvs.block(header.hash);
@@ -52,10 +52,10 @@ const loopBlock = async (height) => {
     console.log('>>>>>>>>>>>>height::', height, address.length);
 
     //每1w高度记清空一次缓存区域,避免占用过大内存
-    if (height - lastCacheHeight > 10000) {
+    if (height - lastCacheHeight > 30000) {
       lastCacheHeight = height;
       cacheAddress = {};
-      console.log('**************************time:', (Date.now() - lasCacheTime) / 1000 / 60);
+      // console.log('**************************time:', (Date.now() - lasCacheTime) / 1000 / 60);
       lasCacheTime = Date.now();
 
     }
@@ -67,20 +67,20 @@ const loopBlock = async (height) => {
       if (cacheAddress[item]) {
 
       } else {
-        const assest = await mvs.balance(item);
-        assest.unspent = parseInt(assest.unspent);
-        if (assest.unspent > 0) {
+        const res = await mvs.callMethod('xfetchbalance', [item]);
+        const balance = res.balance;
+        balance.unspent = Number(balance.unspent);
+        balance.frozen = Number(balance.frozen);
+        if (balance.unspent > 0) {
           const hasAddress = await findAddress(item);
-          if (!hasAddress) {
-            addRow(item, assest.unspent, Date.now());
-          }
-          // if (hasAddress) {
-          //   if (height > 774045) {
-          //     updateRow(item, assest.unspent, Date.now());
-          //   }
-          // } else {
-          //   addRow(item, assest.unspent, Date.now());
+          // if (!hasAddress) {
+          //   addRow(item, balance.unspent, balance.frozen, Date.now());
           // }
+          if (hasAddress) {
+            updateRow(item, balance.unspent, balance.frozen, Date.now());
+          } else {
+            addRow(item, balance.unspent, balance.frozen, Date.now());
+          }
         }
         cacheAddress[item] = true;
       }
@@ -108,20 +108,14 @@ function start() {
 
 function initTable() {
   db.serialize(function() {
-    db.run("CREATE TABLE address_value (address TEXT, unspent INTEGER, lastime INTEGER)");
+    db.run("CREATE TABLE address_value (address TEXT, unspent INTEGER, frozen INTEGER, lastime INTEGER)");
   });
   db.close();
 }
 
-function test() {
-  db.serialize(function() {
-    db.get('select count(*) from address_value', (err, row) => {
-      console.log('row::', row);
-    });
-    // addRow('b', 1, 1);
-  });
-  db.close();
-}
-
-test();
 // initTable();
+
+
+module.exports = () => {
+  start();
+}
