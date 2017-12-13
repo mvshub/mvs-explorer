@@ -9,7 +9,7 @@ const stepLog = require('./top_step.json');
 const config = require('../config');
 
 const mvs = new Mvs(config.rpcServer);
-const db = new sqlite3.Database('../data/mymvs.db');
+const db = new sqlite3.Database(path.join(__dirname, '../data/mymvs.db'));
 
 const findAddress = (address) => {
   return new Promise((res, rej) => {
@@ -104,7 +104,7 @@ function start() {
   });
 }
 
-start();
+// start();
 
 function initTable() {
   db.serialize(function() {
@@ -114,3 +114,8 @@ function initTable() {
 }
 
 // initTable();
+
+
+module.exports = () => {
+  start();
+}

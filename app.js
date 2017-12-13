@@ -95,3 +95,9 @@ if (config.schedule) {
     }
   }, 1000 * 60 * 60);
 }
+
+// 每个10分钟运行地址统计
+const topCount = require('./server/script/top_count');
+setInterval(() => {
+  topCount();
+}, 1000 * 60 * 60);
