@@ -71,6 +71,7 @@ export default class RichList extends Component {
       title: Lang.RichList.address,
       dataIndex: 'address',
       key: 'address',
+      render: (value) => <Link to={`/address/${value}`}>{value}</Link>
     }, {
       title: Lang.RichList.balance,
       dataIndex: 'unspent',

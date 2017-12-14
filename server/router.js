@@ -15,6 +15,7 @@ router.get('/api/free-history', api.freeHistory);
 router.get('/api/dayreport', api.dayReport);
 router.get('/api/topoverview', api.topOverview);
 router.get('/api/toplist', api.topList);
+router.get('/api/toprank', api.topRank);
 router.get('/api/test', api.index);
 
 module.exports = router;

@@ -41,7 +41,9 @@ export default {
     received: '总计接收',
     txCount: '交易笔数',
     assets: '资产',
-    history: '交易记录'
+    history: '交易记录',
+    rank: '排名',
+    rankTips: '基于当前地址中ETP余额排名'
   },
   Assets: {
     symbol: '符号',

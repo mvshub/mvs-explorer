@@ -315,7 +315,7 @@ module.exports = {
         return next();
     },
 
-    topList:async(ctx, next) => {
+    topList: async(ctx, next) => {
         const { page = 1, sort = 'unspent', order = 'desc' } = ctx.query;
         const sqlite = ctx.app.sqliteDb;
         const list = await utils.toPromise(sqlite.all, sqlite, [`select * from address_value order by ${sort} ${order} limit ${100 * (page - 1)}, 100`]);
@@ -326,5 +326,18 @@ module.exports = {
             }
         };
         return next();
+    },
+
+    topRank: async(ctx, next) => {
+        const { address } = ctx.query;
+        const sqlite = ctx.app.sqliteDb;
+        const balance = await ctx.app.mvs.balance(address);
+        const unspent = parseInt(balance.unspent, 10);
+        const res = await utils.toPromise(sqlite.get, sqlite, [`select count(*) as value from address_value where unspent > ${unspent}`]);
+        ctx.body = {
+            rank: res.value + 1
+        };
+        return next();
+        
     }
 };
