@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import { Spin, Table, Row, Col, Icon, Popover, Pagination  } from 'antd';
+import { Spin, Table, Row, Col, Icon, Popover, Pagination, Tooltip } from 'antd';
 import * as Api from '#/service';
 import { moment, formatTime, formatAssetValue } from '#/utils';
 import TxLoader from './txloader';
@@ -49,6 +49,11 @@ export default class Address extends Component {
         txCount: res.result.txCount
       });
     });
+    Api.getRank(id).then(res => {
+      this.setState({
+        rank: res.rank
+      });
+    });
   }
   loadData(id, page) {
     this.setState({
@@ -84,7 +89,6 @@ export default class Address extends Component {
   }
   render() {
     const state = this.state;
-    console.log(state);
     return (
       <div className="address-detail">
         <Row>
@@ -92,7 +96,15 @@ export default class Address extends Component {
             <div className="overview">
               <Row>
                 <Col span={4}>{Lang.Address.address}</Col>
-                <Col span={20}>{state.addressId} </Col>
+                <Col span={20}>
+                  {state.addressId}
+                  <span className="address-rank">
+                    {state.rank ? `${Lang.Address.rank}: ${state.rank}` : null}
+                    <Tooltip title={Lang.Address.rankTips}>
+                      <Icon type="info-circle-o" />
+                    </Tooltip>
+                  </span>
+                </Col>
               </Row>
               <Row>
                 <Col span={4}>{Lang.Address.balance}</Col>

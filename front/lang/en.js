@@ -41,7 +41,9 @@ export default {
     received: 'Total Received',
     txCount: 'Transactions Count',
     assets: 'Assets',
-    history: 'Transaction History'
+    history: 'Transaction History',
+    rank: 'Rank',
+    rankTips: 'Base on the ETP balance'
   },
   Assets: {
     symbol: 'Symbol',

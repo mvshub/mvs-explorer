@@ -20,6 +20,10 @@ export const getAddressOverview = (num, page) => (
   axios.get(`/api/address/${num}`)
 );
 
+export const getRank = (id) => (
+  axios.get(`/api/toprank?address=${id}`)
+);
+
 export const getAddressTx = (num, page) => (
   axios.get(`/api/address-tx/${num}?page=${page}`)
 );
